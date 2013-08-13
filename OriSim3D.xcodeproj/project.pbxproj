@@ -1,0 +1,470 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28FD14FE0DC6FC130079059D /* View3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* View3D.m */; };
+		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
+		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		49930EC30E92E683003FE459 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49930EC20E92E683003FE459 /* ViewController.m */; };
+		49930EDA0E92E95C003FE459 /* ViewChoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49930ED90E92E95C003FE459 /* ViewChoiceModel.m */; };
+		49930EF80E92F42C003FE459 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49930EF70E92F42C003FE459 /* CoreGraphics.framework */; };
+		A51DBD9317AA94670061B9CF /* Memo.txt in Resources */ = {isa = PBXBuildFile; fileRef = A51DBD9217AA94670061B9CF /* Memo.txt */; };
+		A528FEA617BA9BE700EB073C /* hulk400x566.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A528FEA517BA9BE600EB073C /* hulk400x566.jpg */; };
+		A528FEAA17BA9F8100EB073C /* fillebleue400x600.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A528FEA917BA9F8100EB073C /* fillebleue400x600.jpg */; };
+		A54441BE174ACAE000967558 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A54441BD174ACAE000967558 /* iTunesArtwork */; };
+		A572BCA817BABCA400AD6529 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A572BCA717BABCA400AD6529 /* .gitignore */; };
+		A575D69417649DED00C15352 /* test1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A575D69317649DED00C15352 /* test1.txt */; };
+		A5D83E5E175B2FAF00EB9726 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */; };
+		A5D83E66175B2FEC00EB9726 /* Commands.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E5F175B2FEC00EB9726 /* Commands.m */; };
+		A5D83E67175B2FEC00EB9726 /* Interpolator.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E60175B2FEC00EB9726 /* Interpolator.m */; };
+		A5D83E68175B2FEC00EB9726 /* OrFace.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E61175B2FEC00EB9726 /* OrFace.m */; };
+		A5D83E69175B2FEC00EB9726 /* OrPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E62175B2FEC00EB9726 /* OrPoint.m */; };
+		A5D83E6A175B2FEC00EB9726 /* Plane.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E63175B2FEC00EB9726 /* Plane.m */; };
+		A5D83E6B175B2FEC00EB9726 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E64175B2FEC00EB9726 /* Segment.m */; };
+		A5D83E6C175B2FEC00EB9726 /* Vector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E65175B2FEC00EB9726 /* Vector3D.m */; };
+		A5D83E76175B302C00EB9726 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E70175B302C00EB9726 /* Model.m */; };
+		A5D83E7C175B30CA00EB9726 /* austria.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E77175B30CA00EB9726 /* austria.txt */; };
+		A5D83E7D175B30CA00EB9726 /* boat.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E78175B30CA00EB9726 /* boat.txt */; };
+		A5D83E7E175B30CA00EB9726 /* cocotte.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E79175B30CA00EB9726 /* cocotte.txt */; };
+		A5D83E7F175B30CA00EB9726 /* duck.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E7A175B30CA00EB9726 /* duck.txt */; };
+		A5D83E80175B30CA00EB9726 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E7B175B30CA00EB9726 /* test.txt */; };
+		A5D83E82175B30DE00EB9726 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E81175B30DE00EB9726 /* main.m */; };
+		A5D83E93175B311000EB9726 /* austria72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E83175B311000EB9726 /* austria72x72.png */; };
+		A5D83E94175B311000EB9726 /* background256x256.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E84175B311000EB9726 /* background256x256.jpg */; };
+		A5D83E95175B311000EB9726 /* blueyellow72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E85175B311000EB9726 /* blueyellow72x72.png */; };
+		A5D83E96175B311000EB9726 /* boat72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E86175B311000EB9726 /* boat72x72.png */; };
+		A5D83E97175B311000EB9726 /* cocotte72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E87175B311000EB9726 /* cocotte72x72.png */; };
+		A5D83E98175B311000EB9726 /* duck72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E88175B311000EB9726 /* duck72x72.png */; };
+		A5D83E9B175B311000EB9726 /* gally72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E8B175B311000EB9726 /* gally72x72.png */; };
+		A5D83E9C175B311000EB9726 /* gally400x571.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E8C175B311000EB9726 /* gally400x571.jpg */; };
+		A5D83E9D175B311000EB9726 /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E8D175B311000EB9726 /* icon57x57.png */; };
+		A5D83E9E175B311000EB9726 /* icon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E8E175B311000EB9726 /* icon72x72.png */; };
+		A5D83E9F175B311000EB9726 /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E8F175B311000EB9726 /* icon114x114.png */; };
+		A5D83EA0175B311000EB9726 /* icon144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E90175B311000EB9726 /* icon144x144.png */; };
+		A5D83EA2175B311000EB9726 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E92175B311000EB9726 /* Triangle.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* OriSim3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OriSim3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28FD14FC0DC6FC130079059D /* View3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View3D.h; sourceTree = "<group>"; };
+		28FD14FD0DC6FC130079059D /* View3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View3D.m; sourceTree = "<group>"; };
+		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		32CA4F630368D1EE00C91783 /* OriSim3D_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriSim3D_Prefix.pch; sourceTree = "<group>"; };
+		49930EC10E92E683003FE459 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		49930EC20E92E683003FE459 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		49930ED80E92E95C003FE459 /* ViewChoiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewChoiceModel.h; sourceTree = "<group>"; };
+		49930ED90E92E95C003FE459 /* ViewChoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewChoiceModel.m; sourceTree = "<group>"; };
+		49930EF70E92F42C003FE459 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A51DBD9217AA94670061B9CF /* Memo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = Memo.txt; sourceTree = "<group>"; };
+		A51DBD9B17B031480061B9CF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A528FEA517BA9BE600EB073C /* hulk400x566.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = hulk400x566.jpg; path = images/hulk400x566.jpg; sourceTree = "<group>"; };
+		A528FEA917BA9F8100EB073C /* fillebleue400x600.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fillebleue400x600.jpg; path = images/fillebleue400x600.jpg; sourceTree = "<group>"; };
+		A54441BD174ACAE000967558 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		A572BCA717BABCA400AD6529 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A575D69317649DED00C15352 /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test1.txt; path = modeles/test1.txt; sourceTree = "<group>"; };
+		A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "images/Default-568h@2x.png"; sourceTree = "<group>"; };
+		A5D83E5F175B2FEC00EB9726 /* Commands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Commands.m; path = Classes/Commands.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A5D83E60175B2FEC00EB9726 /* Interpolator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Interpolator.m; path = Classes/Interpolator.m; sourceTree = "<group>"; };
+		A5D83E61175B2FEC00EB9726 /* OrFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrFace.m; path = Classes/OrFace.m; sourceTree = "<group>"; };
+		A5D83E62175B2FEC00EB9726 /* OrPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrPoint.m; path = Classes/OrPoint.m; sourceTree = "<group>"; };
+		A5D83E63175B2FEC00EB9726 /* Plane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Plane.m; path = Classes/Plane.m; sourceTree = "<group>"; };
+		A5D83E64175B2FEC00EB9726 /* Segment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Segment.m; path = Classes/Segment.m; sourceTree = "<group>"; };
+		A5D83E65175B2FEC00EB9726 /* Vector3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Vector3D.m; path = Classes/Vector3D.m; sourceTree = "<group>"; };
+		A5D83E6D175B302C00EB9726 /* Commands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Commands.h; path = Classes/Commands.h; sourceTree = "<group>"; };
+		A5D83E6E175B302C00EB9726 /* Interpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interpolator.h; path = Classes/Interpolator.h; sourceTree = "<group>"; };
+		A5D83E6F175B302C00EB9726 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Model.h; path = Classes/Model.h; sourceTree = "<group>"; };
+		A5D83E70175B302C00EB9726 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Model.m; path = Classes/Model.m; sourceTree = "<group>"; };
+		A5D83E71175B302C00EB9726 /* OrFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrFace.h; path = Classes/OrFace.h; sourceTree = "<group>"; };
+		A5D83E72175B302C00EB9726 /* OrPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrPoint.h; path = Classes/OrPoint.h; sourceTree = "<group>"; };
+		A5D83E73175B302C00EB9726 /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Plane.h; path = Classes/Plane.h; sourceTree = "<group>"; };
+		A5D83E74175B302C00EB9726 /* Segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Segment.h; path = Classes/Segment.h; sourceTree = "<group>"; };
+		A5D83E75175B302C00EB9726 /* Vector3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3D.h; path = Classes/Vector3D.h; sourceTree = "<group>"; };
+		A5D83E77175B30CA00EB9726 /* austria.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = austria.txt; path = modeles/austria.txt; sourceTree = "<group>"; };
+		A5D83E78175B30CA00EB9726 /* boat.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = boat.txt; path = modeles/boat.txt; sourceTree = "<group>"; };
+		A5D83E79175B30CA00EB9726 /* cocotte.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cocotte.txt; path = modeles/cocotte.txt; sourceTree = "<group>"; };
+		A5D83E7A175B30CA00EB9726 /* duck.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = duck.txt; path = modeles/duck.txt; sourceTree = "<group>"; };
+		A5D83E7B175B30CA00EB9726 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.txt; path = modeles/test.txt; sourceTree = "<group>"; };
+		A5D83E81175B30DE00EB9726 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Classes/main.m; sourceTree = "<group>"; };
+		A5D83E83175B311000EB9726 /* austria72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = austria72x72.png; path = images/austria72x72.png; sourceTree = "<group>"; };
+		A5D83E84175B311000EB9726 /* background256x256.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background256x256.jpg; path = images/background256x256.jpg; sourceTree = "<group>"; };
+		A5D83E85175B311000EB9726 /* blueyellow72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueyellow72x72.png; path = images/blueyellow72x72.png; sourceTree = "<group>"; };
+		A5D83E86175B311000EB9726 /* boat72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boat72x72.png; path = images/boat72x72.png; sourceTree = "<group>"; };
+		A5D83E87175B311000EB9726 /* cocotte72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cocotte72x72.png; path = images/cocotte72x72.png; sourceTree = "<group>"; };
+		A5D83E88175B311000EB9726 /* duck72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = duck72x72.png; path = images/duck72x72.png; sourceTree = "<group>"; };
+		A5D83E8B175B311000EB9726 /* gally72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gally72x72.png; path = images/gally72x72.png; sourceTree = "<group>"; };
+		A5D83E8C175B311000EB9726 /* gally400x571.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = gally400x571.jpg; path = images/gally400x571.jpg; sourceTree = "<group>"; };
+		A5D83E8D175B311000EB9726 /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon57x57.png; path = images/icon57x57.png; sourceTree = "<group>"; };
+		A5D83E8E175B311000EB9726 /* icon72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon72x72.png; path = images/icon72x72.png; sourceTree = "<group>"; };
+		A5D83E8F175B311000EB9726 /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114x114.png; path = images/icon114x114.png; sourceTree = "<group>"; };
+		A5D83E90175B311000EB9726 /* icon144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon144x144.png; path = images/icon144x144.png; sourceTree = "<group>"; };
+		A5D83E92175B311000EB9726 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Triangle.png; path = images/Triangle.png; sourceTree = "<group>"; };
+		A5D83EA5175B316500EB9726 /* TouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchHandler.h; path = old/TouchHandler.h; sourceTree = "<group>"; };
+		A5D83EA6175B316500EB9726 /* TouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchHandler.m; path = old/TouchHandler.m; sourceTree = "<group>"; };
+		A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OriSim3D.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
+				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
+				49930EF80E92F42C003FE459 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* rk.ios */ = {
+			isa = PBXGroup;
+			children = (
+				28FD14FC0DC6FC130079059D /* View3D.h */,
+				28FD14FD0DC6FC130079059D /* View3D.m */,
+				49930ED80E92E95C003FE459 /* ViewChoiceModel.h */,
+				49930ED90E92E95C003FE459 /* ViewChoiceModel.m */,
+				49930EC10E92E683003FE459 /* ViewController.h */,
+				49930EC20E92E683003FE459 /* ViewController.m */,
+				1D3623240D0F684500981E51 /* AppDelegate.h */,
+				1D3623250D0F684500981E51 /* AppDelegate.m */,
+			);
+			name = rk.ios;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* OriSim3D.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				A572BCA717BABCA400AD6529 /* .gitignore */,
+				A51DBD9217AA94670061B9CF /* Memo.txt */,
+				A5D83EA9175B316C00EB9726 /* old */,
+				A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */,
+				A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */,
+				080E96DDFE201D6D7F000001 /* rk.ios */,
+				A5589B091747B45200809E16 /* rk.or */,
+				A5589AED1747B3B700809E16 /* models */,
+				29B97315FDCFA39411CA2CEA /* main */,
+				29B97317FDCFA39411CA2CEA /* images */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* main */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* OriSim3D_Prefix.pch */,
+				A5D83E81175B30DE00EB9726 /* main.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* images */ = {
+			isa = PBXGroup;
+			children = (
+				A528FEA917BA9F8100EB073C /* fillebleue400x600.jpg */,
+				A528FEA517BA9BE600EB073C /* hulk400x566.jpg */,
+				A5D83E83175B311000EB9726 /* austria72x72.png */,
+				A5D83E84175B311000EB9726 /* background256x256.jpg */,
+				A5D83E85175B311000EB9726 /* blueyellow72x72.png */,
+				A5D83E86175B311000EB9726 /* boat72x72.png */,
+				A5D83E87175B311000EB9726 /* cocotte72x72.png */,
+				A5D83E88175B311000EB9726 /* duck72x72.png */,
+				A5D83E8B175B311000EB9726 /* gally72x72.png */,
+				A5D83E8C175B311000EB9726 /* gally400x571.jpg */,
+				A5D83E8D175B311000EB9726 /* icon57x57.png */,
+				A5D83E8E175B311000EB9726 /* icon72x72.png */,
+				A5D83E8F175B311000EB9726 /* icon114x114.png */,
+				A5D83E90175B311000EB9726 /* icon144x144.png */,
+				A5D83E92175B311000EB9726 /* Triangle.png */,
+				A54441BD174ACAE000967558 /* iTunesArtwork */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49930EF70E92F42C003FE459 /* CoreGraphics.framework */,
+				28FD15070DC6FC5B0079059D /* QuartzCore.framework */,
+				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				A51DBD9B17B031480061B9CF /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5589AED1747B3B700809E16 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				A5D83E77175B30CA00EB9726 /* austria.txt */,
+				A5D83E78175B30CA00EB9726 /* boat.txt */,
+				A5D83E79175B30CA00EB9726 /* cocotte.txt */,
+				A5D83E7A175B30CA00EB9726 /* duck.txt */,
+				A5D83E7B175B30CA00EB9726 /* test.txt */,
+				A575D69317649DED00C15352 /* test1.txt */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		A5589B091747B45200809E16 /* rk.or */ = {
+			isa = PBXGroup;
+			children = (
+				A5D83E6D175B302C00EB9726 /* Commands.h */,
+				A5D83E5F175B2FEC00EB9726 /* Commands.m */,
+				A5D83E6E175B302C00EB9726 /* Interpolator.h */,
+				A5D83E60175B2FEC00EB9726 /* Interpolator.m */,
+				A5D83E6F175B302C00EB9726 /* Model.h */,
+				A5D83E70175B302C00EB9726 /* Model.m */,
+				A5D83E71175B302C00EB9726 /* OrFace.h */,
+				A5D83E61175B2FEC00EB9726 /* OrFace.m */,
+				A5D83E72175B302C00EB9726 /* OrPoint.h */,
+				A5D83E62175B2FEC00EB9726 /* OrPoint.m */,
+				A5D83E73175B302C00EB9726 /* Plane.h */,
+				A5D83E63175B2FEC00EB9726 /* Plane.m */,
+				A5D83E74175B302C00EB9726 /* Segment.h */,
+				A5D83E64175B2FEC00EB9726 /* Segment.m */,
+				A5D83E75175B302C00EB9726 /* Vector3D.h */,
+				A5D83E65175B2FEC00EB9726 /* Vector3D.m */,
+			);
+			name = rk.or;
+			sourceTree = "<group>";
+		};
+		A5D83EA9175B316C00EB9726 /* old */ = {
+			isa = PBXGroup;
+			children = (
+				A5D83EA5175B316500EB9726 /* TouchHandler.h */,
+				A5D83EA6175B316500EB9726 /* TouchHandler.m */,
+			);
+			name = old;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* OriSim3D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OriSim3D" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OriSim3D;
+			productName = PVRTexLoader;
+			productReference = 1D6058910D05DD3D006BFB54 /* OriSim3D.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OriSim3D" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* OriSim3D */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A54441BE174ACAE000967558 /* iTunesArtwork in Resources */,
+				A5D83E5E175B2FAF00EB9726 /* Default-568h@2x.png in Resources */,
+				A5D83E7C175B30CA00EB9726 /* austria.txt in Resources */,
+				A5D83E7D175B30CA00EB9726 /* boat.txt in Resources */,
+				A5D83E7E175B30CA00EB9726 /* cocotte.txt in Resources */,
+				A5D83E7F175B30CA00EB9726 /* duck.txt in Resources */,
+				A5D83E80175B30CA00EB9726 /* test.txt in Resources */,
+				A5D83E93175B311000EB9726 /* austria72x72.png in Resources */,
+				A5D83E94175B311000EB9726 /* background256x256.jpg in Resources */,
+				A5D83E95175B311000EB9726 /* blueyellow72x72.png in Resources */,
+				A5D83E96175B311000EB9726 /* boat72x72.png in Resources */,
+				A5D83E97175B311000EB9726 /* cocotte72x72.png in Resources */,
+				A5D83E98175B311000EB9726 /* duck72x72.png in Resources */,
+				A5D83E9B175B311000EB9726 /* gally72x72.png in Resources */,
+				A5D83E9C175B311000EB9726 /* gally400x571.jpg in Resources */,
+				A5D83E9D175B311000EB9726 /* icon57x57.png in Resources */,
+				A5D83E9E175B311000EB9726 /* icon72x72.png in Resources */,
+				A5D83E9F175B311000EB9726 /* icon114x114.png in Resources */,
+				A5D83EA0175B311000EB9726 /* icon144x144.png in Resources */,
+				A5D83EA2175B311000EB9726 /* Triangle.png in Resources */,
+				A575D69417649DED00C15352 /* test1.txt in Resources */,
+				A51DBD9317AA94670061B9CF /* Memo.txt in Resources */,
+				A528FEA617BA9BE700EB073C /* hulk400x566.jpg in Resources */,
+				A528FEAA17BA9F8100EB073C /* fillebleue400x600.jpg in Resources */,
+				A572BCA817BABCA400AD6529 /* .gitignore in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
+				28FD14FE0DC6FC130079059D /* View3D.m in Sources */,
+				49930EC30E92E683003FE459 /* ViewController.m in Sources */,
+				49930EDA0E92E95C003FE459 /* ViewChoiceModel.m in Sources */,
+				A5D83E66175B2FEC00EB9726 /* Commands.m in Sources */,
+				A5D83E67175B2FEC00EB9726 /* Interpolator.m in Sources */,
+				A5D83E68175B2FEC00EB9726 /* OrFace.m in Sources */,
+				A5D83E69175B2FEC00EB9726 /* OrPoint.m in Sources */,
+				A5D83E6A175B2FEC00EB9726 /* Plane.m in Sources */,
+				A5D83E6B175B2FEC00EB9726 /* Segment.m in Sources */,
+				A5D83E6C175B2FEC00EB9726 /* Vector3D.m in Sources */,
+				A5D83E76175B302C00EB9726 /* Model.m in Sources */,
+				A5D83E82175B30DE00EB9726 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = OriSim3D.entitlements;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = OriSim3D_Prefix.pch;
+				HEADER_SEARCH_PATHS = include;
+				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = OriSim3D;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = OriSim3D.entitlements;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = OriSim3D_Prefix.pch;
+				HEADER_SEARCH_PATHS = include;
+				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = OriSim3D;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Remi Koutcherawy (N39L8B9C4D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "BD2BA617-FA10-46FB-9F2B-C54BAEE39334";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Remi Koutcherawy (2GS622B44D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OriSim3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OriSim3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
