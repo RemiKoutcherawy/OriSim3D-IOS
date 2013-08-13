@@ -436,7 +436,7 @@ int nbPts, nbPtsLines, previousNbPts;
     bottom = left / ratio;
   }
   glFrustumf(left, right, bottom, top, near, far);
-  glTranslatef(0.0f, -20.0f, -900.0f);// -40.0f en y
+  glTranslatef(0.0f, -40.0f, -900.0f);// -40.0f en y
   
   // Switch to ModelView to draw background
   glPushMatrix();

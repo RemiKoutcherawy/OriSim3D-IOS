@@ -1,3 +1,8 @@
+Todo :
+- test => change textures
+- serialize
+- 
+------------
 Classes
 - main.m      => juste instanciation de AppDelegate
 - AppDelegate => didFinishLaunchingWithOptions
@@ -6,7 +11,6 @@ Classes
 - ViewController
   ViewChoice *viewChoice;
   View3D *view3D;
-- 
 ------------
 Pour compiler sur Leopard
 1/ Targets / Summary
@@ -35,13 +39,6 @@ Name:OriSim3D
 Prefix:2GS622B44D
 ID:fr.rk.*
 ------------
-Leaked Object	#	Address	Size	Responsible Library	Responsible Frame
-Malloc 3,50 KB	1	0x169f8600	3,50 KB	OriSim3D	-[Commands tokenizeNSString:]
-Malloc 32 Bytes	1	0x14208710	32 Bytes	OriSim3D	-[Commands tokenizeNSString:]
-Malloc 32 Bytes	1	0xaa08fe0	32 Bytes	OriSim3D	-[Commands tokenizeNSString:]
-Malloc 112 Bytes	1	0xaa09270	112 Bytes	OriSim3D	-[Commands tokenizeNSString:]
-Malloc 32 Bytes	1	0x146033e0	32 Bytes	OriSim3D	-[Commands tokenizeNSString:]
-
 
 
 

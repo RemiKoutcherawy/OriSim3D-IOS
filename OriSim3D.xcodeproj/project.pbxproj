@@ -69,6 +69,7 @@
 		49930ED90E92E95C003FE459 /* ViewChoiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewChoiceModel.m; sourceTree = "<group>"; };
 		49930EF70E92F42C003FE459 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A51ADA1A17BAC39D009B678B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		A51DBD9217AA94670061B9CF /* Memo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = Memo.txt; sourceTree = "<group>"; };
 		A51DBD9B17B031480061B9CF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A528FEA517BA9BE600EB073C /* hulk400x566.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = hulk400x566.jpg; path = images/hulk400x566.jpg; sourceTree = "<group>"; };
@@ -160,6 +161,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A51ADA1A17BAC39D009B678B /* README.md */,
 				A572BCA717BABCA400AD6529 /* .gitignore */,
 				A51DBD9217AA94670061B9CF /* Memo.txt */,
 				A5D83EA9175B316C00EB9726 /* old */,

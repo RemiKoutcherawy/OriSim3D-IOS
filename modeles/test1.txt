@@ -1,16 +1,12 @@
 d -200 366 -200 -200 200 -200 200 366
-//d -200 200 -200 -200 200 -200 200 200
-//c 0 1 c 1 4
-//seg 4
+
 // Marque les medianes et diagonales
-c 0 1 c 0 3 c 0 2 c 1 3
+//c 0 1 c 0 3 c 0 2 c 1 3
 // Marque les demi-bords
 //c 0 4 c 4 1 c 0 6 c 6 3
 // Marque les coins
 //c 7 0 c 7 3 c 7 2 c 7 1
 // Replie le coin et retourne
 od -1 igb
-t 2000 f 5 180 3)
-t 2000 z 0.1 0 0)
-iao t 1000 zf) igb 
+iao t 1000 zf) igb
 
