@@ -1,0 +1,48 @@
+Classes
+- main.m      => juste instanciation de AppDelegate
+- AppDelegate => didFinishLaunchingWithOptions
+  window
+  window.rootViewController = ViewController 
+- ViewController
+  ViewChoice *viewChoice;
+  View3D *view3D;
+- 
+------------
+Pour compiler sur Leopard
+1/ Targets / Summary
+tout en bas décocher "Enable Entitlement"
+2/ Targets / Build Setting 
+Choisir iOS 5.0
+3/ Project / Build Settings
+ Code signing : don't Code sign
+Debug : don't Code sign
+ Any iOS SDK : iPhone Developer
+Release :  : don't Code sign
+ Any iOS SDK : iPhone Developer
+------------
+06/08/2013
+2 certificats valides 
+https://developer.apple.com/account/ios/certificate/certificateList.action
+- iPhone Developer: Remi Koutcherawy (N39L8B9C4D)    => 2GS622B44D
+- iPhone Distribution: Remi Koutcherawy (2GS622B44D) => 2GS622B44D
+- OriSim3D (fr.rk.*) 2GS622D44D fr.rk.or.*
+
+Name:fr.rk.TideOfTheDay
+Prefix:2GS622B44D
+ID:fr.rk.TideOfTheDay
+
+Name:OriSim3D
+Prefix:2GS622B44D
+ID:fr.rk.*
+------------
+Leaked Object	#	Address	Size	Responsible Library	Responsible Frame
+Malloc 3,50 KB	1	0x169f8600	3,50 KB	OriSim3D	-[Commands tokenizeNSString:]
+Malloc 32 Bytes	1	0x14208710	32 Bytes	OriSim3D	-[Commands tokenizeNSString:]
+Malloc 32 Bytes	1	0xaa08fe0	32 Bytes	OriSim3D	-[Commands tokenizeNSString:]
+Malloc 112 Bytes	1	0xaa09270	112 Bytes	OriSim3D	-[Commands tokenizeNSString:]
+Malloc 32 Bytes	1	0x146033e0	32 Bytes	OriSim3D	-[Commands tokenizeNSString:]
+
+
+
+
+
