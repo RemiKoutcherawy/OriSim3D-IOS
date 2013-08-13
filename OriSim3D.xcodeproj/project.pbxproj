@@ -16,7 +16,6 @@
 		49930EC30E92E683003FE459 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49930EC20E92E683003FE459 /* ViewController.m */; };
 		49930EDA0E92E95C003FE459 /* ViewChoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49930ED90E92E95C003FE459 /* ViewChoiceModel.m */; };
 		49930EF80E92F42C003FE459 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49930EF70E92F42C003FE459 /* CoreGraphics.framework */; };
-		A51DBD9317AA94670061B9CF /* Memo.txt in Resources */ = {isa = PBXBuildFile; fileRef = A51DBD9217AA94670061B9CF /* Memo.txt */; };
 		A528FEA617BA9BE700EB073C /* hulk400x566.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A528FEA517BA9BE600EB073C /* hulk400x566.jpg */; };
 		A528FEAA17BA9F8100EB073C /* fillebleue400x600.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A528FEA917BA9F8100EB073C /* fillebleue400x600.jpg */; };
 		A54441BE174ACAE000967558 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A54441BD174ACAE000967558 /* iTunesArtwork */; };
@@ -70,7 +69,6 @@
 		49930EF70E92F42C003FE459 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A51ADA1A17BAC39D009B678B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		A51DBD9217AA94670061B9CF /* Memo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = Memo.txt; sourceTree = "<group>"; };
 		A51DBD9B17B031480061B9CF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A528FEA517BA9BE600EB073C /* hulk400x566.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = hulk400x566.jpg; path = images/hulk400x566.jpg; sourceTree = "<group>"; };
 		A528FEA917BA9F8100EB073C /* fillebleue400x600.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fillebleue400x600.jpg; path = images/fillebleue400x600.jpg; sourceTree = "<group>"; };
@@ -115,6 +113,7 @@
 		A5D83E92175B311000EB9726 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Triangle.png; path = images/Triangle.png; sourceTree = "<group>"; };
 		A5D83EA5175B316500EB9726 /* TouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchHandler.h; path = old/TouchHandler.h; sourceTree = "<group>"; };
 		A5D83EA6175B316500EB9726 /* TouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchHandler.m; path = old/TouchHandler.m; sourceTree = "<group>"; };
+		A5DE3ED017BACC6C005D5E08 /* Memo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Memo.txt; sourceTree = "<group>"; };
 		A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OriSim3D.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				A51ADA1A17BAC39D009B678B /* README.md */,
+				A5DE3ED017BACC6C005D5E08 /* Memo.txt */,
 				A572BCA717BABCA400AD6529 /* .gitignore */,
-				A51DBD9217AA94670061B9CF /* Memo.txt */,
 				A5D83EA9175B316C00EB9726 /* old */,
 				A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */,
 				A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */,
@@ -343,7 +342,6 @@
 				A5D83EA0175B311000EB9726 /* icon144x144.png in Resources */,
 				A5D83EA2175B311000EB9726 /* Triangle.png in Resources */,
 				A575D69417649DED00C15352 /* test1.txt in Resources */,
-				A51DBD9317AA94670061B9CF /* Memo.txt in Resources */,
 				A528FEA617BA9BE700EB073C /* hulk400x566.jpg in Resources */,
 				A528FEAA17BA9F8100EB073C /* fillebleue400x600.jpg in Resources */,
 				A572BCA817BABCA400AD6529 /* .gitignore in Resources */,
