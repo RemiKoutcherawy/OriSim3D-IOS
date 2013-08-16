@@ -111,8 +111,6 @@
 		A5D83E8F175B311000EB9726 /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114x114.png; path = images/icon114x114.png; sourceTree = "<group>"; };
 		A5D83E90175B311000EB9726 /* icon144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon144x144.png; path = images/icon144x144.png; sourceTree = "<group>"; };
 		A5D83E92175B311000EB9726 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Triangle.png; path = images/Triangle.png; sourceTree = "<group>"; };
-		A5D83EA5175B316500EB9726 /* TouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchHandler.h; path = old/TouchHandler.h; sourceTree = "<group>"; };
-		A5D83EA6175B316500EB9726 /* TouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchHandler.m; path = old/TouchHandler.m; sourceTree = "<group>"; };
 		A5DE3ED017BACC6C005D5E08 /* Memo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Memo.txt; sourceTree = "<group>"; };
 		A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OriSim3D.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,7 +161,6 @@
 				A51ADA1A17BAC39D009B678B /* README.md */,
 				A5DE3ED017BACC6C005D5E08 /* Memo.txt */,
 				A572BCA717BABCA400AD6529 /* .gitignore */,
-				A5D83EA9175B316C00EB9726 /* old */,
 				A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */,
 				A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */,
 				080E96DDFE201D6D7F000001 /* rk.ios */,
@@ -257,15 +254,6 @@
 				A5D83E65175B2FEC00EB9726 /* Vector3D.m */,
 			);
 			name = rk.or;
-			sourceTree = "<group>";
-		};
-		A5D83EA9175B316C00EB9726 /* old */ = {
-			isa = PBXGroup;
-			children = (
-				A5D83EA5175B316500EB9726 /* TouchHandler.h */,
-				A5D83EA6175B316500EB9726 /* TouchHandler.m */,
-			);
-			name = old;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,7 +366,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = OriSim3D.entitlements;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -397,7 +384,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = OriSim3D.entitlements;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = OriSim3D_Prefix.pch;
@@ -414,15 +400,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Remi Koutcherawy (N39L8B9C4D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "BD2BA617-FA10-46FB-9F2B-C54BAEE39334";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -431,14 +415,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Remi Koutcherawy (2GS622B44D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

@@ -47,7 +47,7 @@ enum
   BOOL texturesON;
 
   // 3D settings
-	GLfloat scale, rotate, angleX, angleY;
+	GLfloat scale, rotate, angleX, angleY, angleZ, mdx, mdy, mdz;
 	GLuint textures[kNumTextures];
 }
 

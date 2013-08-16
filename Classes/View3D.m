@@ -74,32 +74,16 @@ err = glGetError();								\
   // 32-bit pixel format and RGB color space, you would specify a value of 8 bits per component
   CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
   // GL_RGBA 8 bits per component, 4 components => 4 bytes per pixel
-  // RGB 32 bpp, 8 bpc, kCGImageAlphaNoneSkipLast Mac OS X, iOS
   // RGB 32 bpp, 8 bpc, kCGImageAlphaPremultipliedLast Mac OS X, iO => OK
-  // void *data, width, height, bitsPerComponent(8), bytesPerRow(4*row), CGColorSpaceRef, CGBitmapInfo
 	CGContextRef cgContext = CGBitmapContextCreate(data, wpot, hpot, 8, 4*wpot, colorSpace, kCGImageAlphaPremultipliedLast);
   // Set the blend mode to copy.
   CGContextSetBlendMode(cgContext, kCGBlendModeCopy);
   // Draw upsidedown (the 0,0 is bottom left in OpenGL, top left in CGContext draw)
-  // w->wpot so instead of h->hpot we use the same ratio as w->wpot: wpot/w applied to h
-  int ws, hs;
-//  float k = (float) hpot /(float) height;
-//  if (width > height){
-//    hs = (height * wpot * 400/566)/width;
-//    ws = wpot;
-//  }
-//  else {
-  hs = hpot; //height *k;
-  ws = wpot; //width *k;
-//  }
-
-  CGContextTranslateCTM(cgContext, 0.0, hs);
+  CGContextTranslateCTM(cgContext, 0.0, hpot);
   CGContextScaleCTM(cgContext, 1, -1);
   // Begin at the top (bottom in OpenGL) with original size keep ratio
   // Tiled ? Textures use GL_REPEAT so 1=>hpot should point to a cropped h not a tiled
-  // h:624 w:441 new h:512 for hpot:1024 wpot:512
-
-  CGContextDrawTiledImage(cgContext, CGRectMake(0, 0, ws, hs), cgImage); //(height*wpot)/width
+  CGContextDrawTiledImage(cgContext, CGRectMake(0, 0, wpot, hpot), cgImage);
   // Set new dimensions, all models have a width of 400 and a height of 400 or 566
   if (texture == texfront){
     wTexFront = 400;
@@ -118,8 +102,6 @@ err = glGetError();								\
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wpot, hpot, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
   
-  // Check
-  GetGLError();
 	free(data);
 }
 
@@ -129,7 +111,6 @@ err = glGetError();								\
   [self loadImageFile:@"fillebleue400x600" ofType:@"jpg"  texture:texback];
 	[self loadImageFile:@"background256x256" ofType:@"jpg" texture:texbackground];
 }
-
 
 // Init with frame
 - (id)initWithFrame:(CGRect)frame {
@@ -153,11 +134,8 @@ err = glGetError();								\
     // To trigger OpenGL rendering
     displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawView:)];
     [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    scale = 1.0f;
-		rotate = 0.0f;
-    angleX = 0.0f;
-    angleY = 0.0f;
+    angleX = angleY = angleZ = 0.0f;
+    mdx = mdy = mdz = 0.0f;
     
 		[self loadTextures];
 		[self setMultipleTouchEnabled:YES];
@@ -179,29 +157,34 @@ err = glGetError();								\
     [cde release];
     
     // Textures on
-    texturesON = YES;
+    texturesON = NO;
   }
   return self;
 }
 
 // Called from ChoiceController
 - (void)setPliage:(NSString *)pliage {
-  // Read pliage
-  NSMutableString *cde = [[NSMutableString alloc] init];
-  [cde appendString:@"read "];
-  [cde appendString:pliage];
-
-  // Restore view
-  scale = 1.0;
-  rotate = 0.0;
-  angleX = 0;
-  angleY = 0;
-  
-  // Launch
-  [commands commandWithNSString:cde];
-  [cde release];
-  [self setMyNeedsDisplay];
+  if ([pliage isEqualToString:@"notexture"])
+    texturesON = NO;
+  else if ([pliage isEqualToString:@"texture"])
+    texturesON = YES;
+  else {
+    // Read pliage
+    NSMutableString *cde = [[NSMutableString alloc] init];
+    [cde appendString:@"read "];
+    [cde appendString:pliage];
+    
+    // Restore view
+    angleX = angleY = angleZ = 0.0f;
+    mdx = mdy = mdz = 0.0f;
+    
+    // Launch
+    [commands commandWithNSString:cde];
+    [cde release];
+    [self setMyNeedsDisplay];
+  }
 }
+
 // Called from commands 
 - (void) setMyNeedsDisplay {
   displayLink.paused = FALSE;
@@ -220,7 +203,7 @@ err = glGetError();								\
   }
 }
 
-// Called from Commands when animation needs a redraw
+// Called by Commands when animation needs a redraw
 - (void)animateWithCommands:(Commands *)thecommands {
   self->commands = thecommands;
   self->animated = YES;
@@ -232,7 +215,7 @@ GLfloat *mTexBufferFront=nil, *mTexBufferBack=nil;
 int nbPts, nbPtsLines, previousNbPts;
 
 // Initialize from model
-// Call from onDrawFrame each time the model need to be drawn
+// Called by onDrawFrame each time the model need to be drawn
 // The buffers are allocated only if the number of points changed
 // The points are copied to the buffers
 - (void) initFromModel {
@@ -267,19 +250,6 @@ int nbPts, nbPtsLines, previousNbPts;
   }
   previousNbPts = (nbPts + nbPtsLines);
 
-//  // Index for each point of faces x 2 bytes for short
-//  ByteBuffer ibbf = ByteBuffer.allocateDirect(nbPts * 2);
-//  ibbf.order(ByteOrder.nativeOrder());
-//  mIndexBufferFront = ibbf.asShortBuffer();
-//  ByteBuffer ibbb = ByteBuffer.allocateDirect(nbPts * 2);
-//  ibbb.order(ByteOrder.nativeOrder());
-//  mIndexBufferBack = ibbb.asShortBuffer();
-//  
-//  // Index for each point of line x 2 bytes for short
-//  ByteBuffer ibbl = ByteBuffer.allocateDirect(nbPtsLines * 2);
-//  ibbl.order(ByteOrder.nativeOrder());
-//  mIndexBufferLines = ibbl.asShortBuffer();
-//  
   short indexPts = 0;
   short indexPtsLines = 0;
   short indexTex = 0;
@@ -298,48 +268,30 @@ int nbPts, nbPtsLines, previousNbPts;
       mFVertexBuffer[indexPts++] = c->x + f->offset * n->x;
       mFVertexBuffer[indexPts++] = c->y + f->offset * n->y;
       mFVertexBuffer[indexPts++] = c->z + f->offset * n->z;
-//      mFNormalsFront.put(n[0]); mFNormalsFront.put(n[1]); mFNormalsFront.put(n[2]);
-//      mFNormalsBack.put(-n[0]); mFNormalsBack.put(-n[1]); mFNormalsBack.put(-n[2]);
       if (texturesON) {
         mTexBufferFront[indexTex] = (200 + c->xf)/wTexFront;
         mTexBufferFront[indexTex+1] = (200 + c->yf)/hTexFront;
-        
         mTexBufferBack[indexTex++] = (200 + c->xf)/wTexBack;
         mTexBufferBack[indexTex++] = (hTexBack -200 - c->yf)/hTexBack;
       }
-//      mIndexBufferFront.put(index);
-//      mIndexBufferBack.put(index);
-//      index++;
       mFVertexBuffer[indexPts++] = p->x + f->offset * n->x;
       mFVertexBuffer[indexPts++] = p->y + f->offset * n->y;
       mFVertexBuffer[indexPts++] = p->z + f->offset * n->z;
-//      mFNormalsFront.put(n[0]); mFNormalsFront.put(n[1]); mFNormalsFront.put(n[2]);
-//      mFNormalsBack.put(-n[0]); mFNormalsBack.put(-n[1]); mFNormalsBack.put(-n[2]);
       if (texturesON) {
         mTexBufferFront[indexTex] = (200 + p->xf)/wTexFront;
         mTexBufferFront[indexTex+1] = (200 + p->yf)/hTexFront;
-        
         mTexBufferBack[indexTex++] = (200 + p->xf)/wTexBack;
         mTexBufferBack[indexTex++] = (hTexBack -200 - p->yf)/hTexBack;
       }
-//      mIndexBufferFront.put(index);
-//      mIndexBufferBack.put((short) (index+1));
-//      index++;
       mFVertexBuffer[indexPts++] = s->x + f->offset * n->x;
       mFVertexBuffer[indexPts++] = s->y + f->offset * n->y;
       mFVertexBuffer[indexPts++] = s->z + f->offset * n->z;
-//      mFNormalsFront.put(n[0]); mFNormalsFront.put(n[1]); mFNormalsFront.put(n[2]);
-//      mFNormalsBack.put(-n[0]); mFNormalsBack.put(-n[1]); mFNormalsBack.put(-n[2]);
       if (texturesON) {
         mTexBufferFront[indexTex] = (200 + s->xf)/wTexFront;
         mTexBufferFront[indexTex+1] = (200 + s->yf)/hTexFront;
-        
         mTexBufferBack[indexTex++] = (200 + s->xf)/wTexBack;
         mTexBufferBack[indexTex++] = (hTexBack -200 - s->yf)/hTexBack;
       }
-//      mIndexBufferFront.put(index);
-//      mIndexBufferBack.put((short) (index-1));
-//      index++;
       p = s; // next triangle
     }
   }
@@ -350,11 +302,9 @@ int nbPts, nbPtsLines, previousNbPts;
       mFVertexBuffer[indexPtsLines++]=s->p1->x;
       mFVertexBuffer[indexPtsLines++]=s->p1->y;
       mFVertexBuffer[indexPtsLines++]=s->p1->z;
-//      mIndexBufferLines.put(index++);
       mFVertexBuffer[indexPtsLines++]=s->p2->x;
       mFVertexBuffer[indexPtsLines++]=s->p2->y;
       mFVertexBuffer[indexPtsLines++]=s->p2->z;
-//      mIndexBufferLines.put(index++);
     }
   }
 }
@@ -379,20 +329,19 @@ int nbPts, nbPtsLines, previousNbPts;
     0, 0, 1,    0, 0, 1,    0, 0, 1,
     0, 0, 1,    0, 0, 1,    0, 0, 1,
   };
-  // begin textures
+  // Begin textures
   glEnable(GL_TEXTURE_2D);
   glFrontFace(GL_CCW);
   
+  // Vertex
   glVertexPointer(3, GL_FLOAT, 0, vertices);
   glEnableClientState(GL_VERTEX_ARRAY);
-  // Check
-  GetGLError();
-  
+
+  // Normals
   glNormalPointer(GL_FLOAT, 0, normals);
   glEnableClientState(GL_NORMAL_ARRAY);
-  // Check
-  GetGLError();
   
+  // Textures
   glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, textures[texbackground]);
@@ -400,29 +349,24 @@ int nbPts, nbPtsLines, previousNbPts;
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  
+
+  // Render
   glDrawArrays(GL_TRIANGLES, 0, 6);
+  
+  // End textures
+  glDisable(GL_TEXTURE_2D);
 }
 
 // Main drawing
 - (void) drawModel {
-//  glClearColor(1.0f, 0.5f, 0.5f, 1);
-//  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  // Un rectangle 400x572 -200+200 x -286+286
-  [EAGLContext setCurrentContext:context];
-  GetGLError();
-  
+  // A rectangle 400x572 -200+200 x -286+286
+  [EAGLContext setCurrentContext:context];  
   glViewport(0, 0, backingWidth, backingHeight);
-  GetGLError();
   
+  // Projection
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  
-  //	glFrustumf(-1.0f, 1.0f, -1.5, 1.5, 1.0f, 10.0f);
-  //  GLU.gluPerspective(gl, 30, ratio, 1, 4000); Android source Bugged !! Should be :
-  //  GLU.gluPerspective(gl, 30, (float) w /h, 1, 4000);
-  //  600 1200 semble OK mais le zoom coupe l'image...
   float ratio = (float) backingWidth / backingHeight, fov = 30.0f, near = 60, far = 12000, top, bottom, left, right;
   if (ratio >= 1.0f){
     top = near * (float) tan(fov * (M_PI / 360.0));
@@ -436,10 +380,10 @@ int nbPts, nbPtsLines, previousNbPts;
     bottom = left / ratio;
   }
   glFrustumf(left, right, bottom, top, near, far);
-  glTranslatef(0.0f, -40.0f, -900.0f);// -40.0f en y
+  // TODO TEST -40.0f on y ? -900.0f on z ?
+  glTranslatef(0.0f, 0.0f, -850.0f);
   
   // Switch to ModelView to draw background
-  glPushMatrix();
   glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -450,35 +394,42 @@ int nbPts, nbPtsLines, previousNbPts;
   // Draw Background
   [self drawBackground];
   
-  // Switch to Projection to handle rotation
-  glMatrixMode(GL_PROJECTION);
-  glPopMatrix();
-
-  // Handle rotation (in GL_PROJECTION assured to be centered )
+  // Handle finger rotation (in GL_MODELVIEW )
   glRotatef(angleX, 0, 1, 0);// Yes there is an inversion between X and Y
   glRotatef(angleY, 1, 0, 0);
   
+  // Switch to Projection to handle rotation
+  glMatrixMode(GL_PROJECTION);
+  glPopMatrix();
+  glPushMatrix();
+  
+  // Handle finger zoom, move, rotate on Z (in GL_PROJECTION)
+  glRotatef(angleZ, 0, 0, 1);
+  glTranslatef(mdx, mdy, mdz);
+  
   // Switch to ModelView to draw model
   glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
   
-  // Handle scale in modelview
-	glScalef(scale, scale, 1.0f);
   // Draw only one side of triangle
   glEnable(GL_CULL_FACE);
   
   // Set points arrays *mFVertexBuffer
-  // Set texture arrays *mTexBufferFront, *mTextBufferBack
-  // from model
+  // Set texture arrays *mTexBufferFront, *mTextBufferBack from model
   [self initFromModel];
-  
-  // Begin textures
-  glEnable(GL_TEXTURE_2D);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+  // Switch textures
+  if (texturesON) {
+    // Begin textures
+    glEnable(GL_TEXTURE_2D);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  } else {
+    glDisable(GL_LIGHTING);
+  }
+  // Vertex
   glEnableClientState(GL_VERTEX_ARRAY);
   
   // Enable depth test
@@ -487,24 +438,33 @@ int nbPts, nbPtsLines, previousNbPts;
   // Front face
   glFrontFace(GL_CCW);
   glVertexPointer(3, GL_FLOAT, 0, mFVertexBuffer);
-  // Front Texture
-  glTexCoordPointer(2, GL_FLOAT, 0, mTexBufferFront);
-	glBindTexture(GL_TEXTURE_2D, textures[texfront]);
+  // Front face
+  if (texturesON) {
+    // Front Texture
+    glBindTexture(GL_TEXTURE_2D, textures[texfront]);
+    glTexCoordPointer(2, GL_FLOAT, 0, mTexBufferFront);
+  } else {
+    glColor4f(145.0f/255.0f, 199.0f/255.0f, 1.0f, 1.0f); // rgba => blue
+  }
   // Draw front face
   glDrawArrays(GL_TRIANGLES, 0, nbPts); // GL_TRIANGLE_FAN ?
   
   // Back face
   glFrontFace(GL_CW);
   glVertexPointer(3, GL_FLOAT, 0, mFVertexBuffer);
-  // Back texture
-  glTexCoordPointer(2, GL_FLOAT, 0, mTexBufferBack);
-	glBindTexture(GL_TEXTURE_2D, textures[texback]);
+  // Back face
+  if (texturesON) {
+    // Back texture
+    glBindTexture(GL_TEXTURE_2D, textures[texback]);
+    glTexCoordPointer(2, GL_FLOAT, 0, mTexBufferBack);
+  } else {
+    glColor4f(1.0f, 249.0f/255.0f, 145.0f/255.0f, 1.0f); // rgba => yellow
+  }
   // Draw back face
   glDrawArrays(GL_TRIANGLES, 0, nbPts);
   
-  // end textures
+  // End textures
 	glDisable(GL_TEXTURE_2D);
-  GetGLError();
   
   // Lines - a mess to get black lines => no texture no light
   glColor4f(0.0f, 0.0f, 0.0f, 1.0f); // rgba => black
@@ -515,14 +475,9 @@ int nbPts, nbPtsLines, previousNbPts;
   glVertexPointer(3, GL_FLOAT, 0, mFVertexBuffer);
   glDrawArrays(GL_LINES, nbPts, nbPtsLines);
   glColor4f(1.0f, 1.0f, 1.0f, 1.0f); // rgba => white
-//  glDrawElements(GL_LINES, nbPtsLines, GL_UNSIGNED_SHORT, mIndexBufferLines);
 
   // Render
   glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderbuffer);
-//  [context presentRenderbuffer:GL_RENDERBUFFER_OES];
-  
-	// Check
-  GetGLError();
 }
 
 - (void)layoutSubviews {
@@ -544,13 +499,11 @@ int nbPts, nbPtsLines, previousNbPts;
 
   glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
   glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
-  GetGLError();
   
   glGenRenderbuffersOES(1, &depthRenderbuffer);
   glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthRenderbuffer);
   glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES, backingWidth, backingHeight);
   glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, depthRenderbuffer);
-  GetGLError();
 
   if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
     NSLog(@"failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
@@ -589,7 +542,6 @@ int nbPts, nbPtsLines, previousNbPts;
 - (float)distanceFromPoint:(CGPoint)pointA toPoint:(CGPoint)pointB {
 	float xD = fabs(pointA.x - pointB.x);
 	float yD = fabs(pointA.y - pointB.y);
-	
 	return sqrt(xD*xD + yD*yD);
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -600,23 +552,23 @@ int nbPts, nbPtsLines, previousNbPts;
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touchA, *touchB;
-	CGPoint pointA, pointB;
+	CGPoint pointA, pointB, prevA, prevB;
   static float lastDownTime, lastUpTime, lastUpUpTime;
   static BOOL wasRunning;
   
+  float currentTime = CACurrentMediaTime();
+
 	if ([touches count] == 1) {
     touchA = [[touches allObjects] objectAtIndex:0];
     
 		pointA = [touchA locationInView:self];
 		pointB = [touchA previousLocationInView:self];
 		
-		float yDistance = pointA.y - pointB.y;
+//		float yDistance = pointA.y - pointB.y;
 		
-		rotate += 0.5 * yDistance;
+//		rotate += 0.5 * yDistance;
     angleX += (pointA.x - pointB.x) * 180.0f / 320;
     angleY += (pointA.y - pointB.y) * 180.0f / 320;
-    
-    float currentTime = CACurrentMediaTime();
     
     // One Pointer up
     if ([touchA phase] == UITouchPhaseEnded){
@@ -627,10 +579,8 @@ int nbPts, nbPtsLines, previousNbPts;
       // Double tap restore rotation and zoom fit
       else if ((currentTime - lastUpTime) < 0.500f){
         lastUpUpTime = currentTime;
-        scale = 1.0f;
-        rotate = 0.0f;
-        angleX = 0;
-        angleY = 0;
+        angleX = angleY = angleZ = 0.0f;
+        mdx = mdy = mdz = 0.0f;
         [commands commandWithNSString:@"zf"];
       }
       // Simple tap continue, if we we were not already running and paused by touch down
@@ -652,29 +602,69 @@ int nbPts, nbPtsLines, previousNbPts;
         // We were already in pause, touch up should continue
         wasRunning = false;
     }
-    // Rotate with one finger
 	}
+  // Two fingers Zoom, Translate, Rotates around Z axis
 	else if ([touches count] == 2) {
     touchA = [[touches allObjects] objectAtIndex:0];
 		touchB = [[touches allObjects] objectAtIndex:1];
     
 		pointA = [touchA locationInView:self];
 		pointB = [touchB locationInView:self];
-		
-		float currDistance = [self distanceFromPoint:pointA toPoint:pointB];
-		
-		pointA = [touchA previousLocationInView:self];
-		pointB = [touchB previousLocationInView:self];
-		
-		float prevDistance = [self distanceFromPoint:pointA toPoint:pointB];
-		
-		scale += 0.005 * (currDistance - prevDistance);
-		
-		if (scale > 10.0f)
-			scale = 10.0f;
-		else if (scale < 0.025f)
-			scale = 0.025f;
+    
+    // First second pointer down
+    if ([touchB phase] == UITouchPhaseBegan) {
+      lastDownTime = currentTime;
+    }
+    // Touch and tap, undo, and restore view
+    // Second pointer up short after pointer down
+    else if ([touchB phase] == UITouchPhaseEnded
+             && (currentTime - lastDownTime) < 0.500f){
+      [commands commandWithNSString:@"u"];
+      lastUpUpTime = currentTime;
+      angleX = angleY = angleZ = 0.0f;
+      mdx = mdy = mdz = 0.0f;
+
+      [commands commandWithNSString:@"zf"];
+    }
+    // Zoom rotate with two fingers
+    // Not the first second pointer down, not pointer up
+    else {
+      // Delta distance
+      prevA = [touchA previousLocationInView:self];
+      prevB = [touchB previousLocationInView:self];
+      float vx0 = prevB.x - prevA.x;
+      float vy0 = prevB.y - prevA.y;
+      float vx1 = pointB.x - pointA.x;
+      float vy1 = pointB.y - pointA.y;
+      float lastd = (float) sqrt(vx0*vx0 + vy0*vy0);
+      float d = (float) sqrt(vx1*vx1 + vy1*vy1);
+      float dd = (d - lastd) * 2; // arbitraire
+      // Delta Center
+      float dx = ((pointB.x + pointA.x)-(prevB.x + prevA.x)) /2;
+      float dy = ((pointB.y + pointA.y)-(prevB.y + prevA.y)) /2;
+      // Delta angle
+      float cz = vx1*vy0-vy1*vx0; // Cross product = v0 v1 sin
+      float sp = vx0*vx1+vy0*vy1; // Scalar product = v0 v1 cos
+      float v0v1 = (float) (sqrt(vx0*vx0+vy0*vy0) * sqrt(vx1*vx1+vy1*vy1));
+      float sin = cz / v0v1;
+      float cos = sp / v0v1;
+      if (cos > 1.0f )
+        cos = 1.0f;
+      if (cos < -1.0f )
+        cos = -1.0f;
+      float angle = (float)(acos(cos) * 180/M_PI);
+      if (sin < 0)
+        angle = -angle;
+      
+      // Set
+      angleZ += angle;
+      mdx += dx;
+      mdy -= dy;
+      mdz += dd;
+    }
 	}
+  
+  // Draw result
   [self drawModel];
   [self setMyNeedsDisplay];
 }

@@ -17,9 +17,9 @@
   if (bt.tag == 3)
     [view3D setPliage: @"austria"];
   if (bt.tag == 4)
-    [view3D setPliage: @"test"];
+    [view3D setPliage: @"notexture"];
   if (bt.tag == 5)
-      [view3D setPliage: @"test1"];
+      [view3D setPliage: @"texture"];
   
   // Collapse
   [((ViewChoiceModel*)bt.nextResponder) open_or_collapse];
