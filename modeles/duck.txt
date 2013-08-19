@@ -66,6 +66,7 @@ t 200 r 4 10 3 12 16 18 6)
 t 200 r 14 -10 10 r 15 -10 9 a 2)
 // Ouvre un peu le corps 2 degres
 t 500 r 5 -4 5 r 5 4 6)
+om 0.01
 // Montre
 iao t 1000 zf) 
 iso t 4000 ty 360) igb

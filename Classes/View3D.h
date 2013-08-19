@@ -44,7 +44,7 @@ int texfront, texback;
   
   // Texture dimensions
   int wTexFront, hTexFront, wTexBack, hTexBack;
-  BOOL texturesON;
+  BOOL texturesON, linesON;
 
   // 3D settings
 	GLfloat scale, rotate, angleX, angleY, angleZ, mdx, mdy, mdz;

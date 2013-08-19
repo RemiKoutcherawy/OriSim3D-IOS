@@ -167,6 +167,8 @@ err = glGetError();								\
 // Called from ChoiceController
 - (void)setPliage:(NSString *)pliage {
   if ([pliage isEqualToString:@"notexture"]){
+    if (texturesON == NO)
+      linesON = ~linesON;
     texturesON = NO;
   }
   else if ([pliage isEqualToString:@"texture"]){
@@ -477,14 +479,16 @@ int nbPts, nbPtsLines, previousNbPts;
   // End textures
 	glDisable(GL_TEXTURE_2D);
   
-  // Lines - a mess to get black lines => no texture no light
+//  // Lines - a mess to get black lines => no texture no light
   glColor4f(0.0f, 0.0f, 0.0f, 1.0f); // rgba => black
   glDisable(GL_TEXTURE_2D);
-  glDisable(GL_LIGHTING);
-  glLineWidth(3.0f);
-  glClear(GL_DEPTH_BUFFER_BIT); // See through faces
-  glVertexPointer(3, GL_FLOAT, 0, mFVertexBuffer);
-  glDrawArrays(GL_LINES, nbPts, nbPtsLines);
+  if (linesON) {
+    glDisable(GL_LIGHTING);
+    glLineWidth(3.0f);
+    glClear(GL_DEPTH_BUFFER_BIT); // See through faces
+    glVertexPointer(3, GL_FLOAT, 0, mFVertexBuffer);
+    glDrawArrays(GL_LINES, nbPts, nbPtsLines);
+  }
   glColor4f(1.0f, 1.0f, 1.0f, 1.0f); // rgba => white
 
   // Render
