@@ -4,7 +4,11 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix).rk.or.OriSim3D</string>
+		<string>2GS622B44D.fr.rk.OriSim3D</string>
 	</array>
+  <key>application-identifier</key>
+    <string>2GS622B44D.fr.rk.OriSim3D</string>
+  <key>get-task-allow</key>
+    <true/>
 </dict>
 </plist>

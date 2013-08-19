@@ -13,9 +13,6 @@
 		<string>icon57x57.png</string>
 		<string>icon114x114.png</string>
 		<string>icon72x72.png</string>
-		<string>Icon-Small.png</string>
-		<string>Icon-Small-50.png</string>
-		<string>Icon-Small@2x.png</string>
 		<string>icon144x144.png</string>
 	</array>
 	<key>CFBundleIcons</key>
@@ -27,9 +24,6 @@
 				<string>icon57x57.png</string>
 				<string>icon114x114.png</string>
 				<string>icon72x72.png</string>
-				<string>Icon-Small.png</string>
-				<string>Icon-Small-50.png</string>
-				<string>Icon-Small@2x.png</string>
 				<string>icon144x144.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
@@ -37,7 +31,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>rk.or.${PRODUCT_NAME:identifier}</string>
+	<string>fr.rk.${PRODUCT_NAME:identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -59,6 +53,11 @@
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
