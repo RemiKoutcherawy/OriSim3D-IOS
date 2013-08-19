@@ -351,7 +351,8 @@
 - (float)adjustWithOrPoint:(OrPoint *)p
                   withList:(NSArray *)segts {
   // Take all segments containing point p or given list
-  id segs = segts == nil ? [self searchSegmentsListWithOrPoint:p] : segts;
+  BOOL isListMadeWithPoint = segts == nil;
+  NSArray *segs = segts == nil ? [self searchSegmentsListWithOrPoint:p] : segts;
   float count = [segs count];
   float dmax = 100;
   // Kaczmarz
@@ -392,7 +393,8 @@
     }
     imax = i;
   }
-  [segs dealloc];
+  if (isListMadeWithPoint)
+    [segs dealloc];
   [pm dealloc];
   return dmax;
 }
@@ -438,7 +440,7 @@
                      withList:(NSArray *)pts {
   for (OrPoint *p in pts) {
     // Point n = s0->closestLine(new Segment(p,p))->p1;
-    // First case if there is a segment joining pts[0] and s
+    // First case if there is a segment joining point p and s search point common pc
     OrPoint *pc = nil, *pd = nil;
     for (Segment *si in segments) {
       if ([((Segment *) si) equalsWithOrPoint:p withOrPoint:s->p1]) {
@@ -462,6 +464,7 @@
         break;
       }
     }
+    // If we have pc point common and pd point distant
     if (pc != nil) {
       // Turn p on pc pd (keep distance from Pc to P
       float pcp = (float) sqrt((pc->x-p->x)*(pc->x-p->x) + (pc->y-p->y)*(pc->y-p->y) + (pc->z-p->z)*(pc->z-p->z));

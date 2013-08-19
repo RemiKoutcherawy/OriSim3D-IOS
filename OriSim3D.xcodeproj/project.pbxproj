@@ -17,8 +17,11 @@
 		49930EDA0E92E95C003FE459 /* ViewChoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49930ED90E92E95C003FE459 /* ViewChoiceModel.m */; };
 		49930EF80E92F42C003FE459 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49930EF70E92F42C003FE459 /* CoreGraphics.framework */; };
 		A528FEA617BA9BE700EB073C /* hulk400x566.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A528FEA517BA9BE600EB073C /* hulk400x566.jpg */; };
-		A528FEAA17BA9F8100EB073C /* fillebleue400x600.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A528FEA917BA9F8100EB073C /* fillebleue400x600.jpg */; };
 		A54441BE174ACAE000967558 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A54441BD174ACAE000967558 /* iTunesArtwork */; };
+		A5675BCD17C149C400A6450B /* ville822x679.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5675BCC17C149C400A6450B /* ville822x679.jpg */; };
+		A5675BCF17C1584E00A6450B /* ironman400x611.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5675BCE17C1584E00A6450B /* ironman400x611.jpg */; };
+		A5675BD117C21D2400A6450B /* butterfly.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5675BD017C21D2400A6450B /* butterfly.txt */; };
+		A5675BD517C271FE00A6450B /* butterfly72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5675BD417C271FE00A6450B /* butterfly72x72.png */; };
 		A572BCA817BABCA400AD6529 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A572BCA717BABCA400AD6529 /* .gitignore */; };
 		A575D69417649DED00C15352 /* test1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A575D69317649DED00C15352 /* test1.txt */; };
 		A5D83E5E175B2FAF00EB9726 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */; };
@@ -71,8 +74,11 @@
 		A51ADA1A17BAC39D009B678B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		A51DBD9B17B031480061B9CF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A528FEA517BA9BE600EB073C /* hulk400x566.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = hulk400x566.jpg; path = images/hulk400x566.jpg; sourceTree = "<group>"; };
-		A528FEA917BA9F8100EB073C /* fillebleue400x600.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fillebleue400x600.jpg; path = images/fillebleue400x600.jpg; sourceTree = "<group>"; };
 		A54441BD174ACAE000967558 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		A5675BCC17C149C400A6450B /* ville822x679.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ville822x679.jpg; path = images/ville822x679.jpg; sourceTree = "<group>"; };
+		A5675BCE17C1584E00A6450B /* ironman400x611.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ironman400x611.jpg; path = images/ironman400x611.jpg; sourceTree = "<group>"; };
+		A5675BD017C21D2400A6450B /* butterfly.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = butterfly.txt; path = modeles/butterfly.txt; sourceTree = "<group>"; };
+		A5675BD417C271FE00A6450B /* butterfly72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = butterfly72x72.png; path = images/butterfly72x72.png; sourceTree = "<group>"; };
 		A572BCA717BABCA400AD6529 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A575D69317649DED00C15352 /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test1.txt; path = modeles/test1.txt; sourceTree = "<group>"; };
 		A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "images/Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -185,8 +191,10 @@
 		29B97317FDCFA39411CA2CEA /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A5675BD417C271FE00A6450B /* butterfly72x72.png */,
+				A5675BCE17C1584E00A6450B /* ironman400x611.jpg */,
+				A5675BCC17C149C400A6450B /* ville822x679.jpg */,
 				A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */,
-				A528FEA917BA9F8100EB073C /* fillebleue400x600.jpg */,
 				A528FEA517BA9BE600EB073C /* hulk400x566.jpg */,
 				A5D83E83175B311000EB9726 /* austria72x72.png */,
 				A5D83E84175B311000EB9726 /* background256x256.jpg */,
@@ -223,6 +231,7 @@
 		A5589AED1747B3B700809E16 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				A5675BD017C21D2400A6450B /* butterfly.txt */,
 				A5D83E77175B30CA00EB9726 /* austria.txt */,
 				A5D83E78175B30CA00EB9726 /* boat.txt */,
 				A5D83E79175B30CA00EB9726 /* cocotte.txt */,
@@ -331,8 +340,11 @@
 				A5D83EA2175B311000EB9726 /* Triangle.png in Resources */,
 				A575D69417649DED00C15352 /* test1.txt in Resources */,
 				A528FEA617BA9BE700EB073C /* hulk400x566.jpg in Resources */,
-				A528FEAA17BA9F8100EB073C /* fillebleue400x600.jpg in Resources */,
 				A572BCA817BABCA400AD6529 /* .gitignore in Resources */,
+				A5675BCD17C149C400A6450B /* ville822x679.jpg in Resources */,
+				A5675BCF17C1584E00A6450B /* ironman400x611.jpg in Resources */,
+				A5675BD117C21D2400A6450B /* butterfly.txt in Resources */,
+				A5675BD517C271FE00A6450B /* butterfly72x72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +378,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = OriSim3D.entitlements;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -384,6 +397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = OriSim3D.entitlements;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = OriSim3D_Prefix.pch;
@@ -400,13 +414,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Remi Koutcherawy (N39L8B9C4D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "3AB90B8A-0434-40F8-A173-16E68125C89C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -415,12 +431,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Remi Koutcherawy (2GS622B44D)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

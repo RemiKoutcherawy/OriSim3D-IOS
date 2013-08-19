@@ -442,7 +442,7 @@
   else if ([[todo objectAtIndex:iTok] isEqualToString:@"as"]) {
     iTok++;
     OrPoint *p0 = [model->points objectAtIndex:(int) [self get]];
-    NSArray *list = [self listPointsWithModel:model];
+    NSArray *list = [self listSegmentsWithModel:model];
     [model adjustSegmentsWithOrPoint:p0 withList:list];
     [list dealloc];
   }
@@ -634,8 +634,7 @@
 
 - (NSArray *)listSegmentsWithModel:(Model *)model {
   NSMutableArray *list = [[NSMutableArray alloc] init];
-  while (!isnan([self get]))
-  @try {
+  while (!isnan([self get])) @try {
     [list addObject:[model->segments objectAtIndex:p]];
   }
   @catch (NSException *e) {

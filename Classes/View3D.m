@@ -84,15 +84,7 @@ err = glGetError();								\
   // Begin at the top (bottom in OpenGL) with original size keep ratio
   // Tiled ? Textures use GL_REPEAT so 1=>hpot should point to a cropped h not a tiled
   CGContextDrawTiledImage(cgContext, CGRectMake(0, 0, wpot, hpot), cgImage);
-  // Set new dimensions, all models have a width of 400 and a height of 400 or 566
-  if (texture == texfront){
-    wTexFront = 400;
-    hTexFront = (int)((height * 400) / (float) width);
-  }
-  else if (texture == texback) {
-    wTexBack = 400;
-    hTexBack = (int)((height * 400) / (float) width);
-  }
+  // Release
   CGContextRelease(cgContext);
 	CGColorSpaceRelease(colorSpace);
   
@@ -105,10 +97,18 @@ err = glGetError();								\
 	free(data);
 }
 
-// Load 3 textures
+// Load 5 textures (change is done in setPliage())
 - (void)loadTextures {
-  [self loadImageFile:@"hulk400x566" ofType:@"jpg" texture:texfront];
-  [self loadImageFile:@"fillebleue400x600" ofType:@"jpg"  texture:texback];
+  [self loadImageFile:@"hulk400x566" ofType:@"jpg"  texture:texfront1];
+  [self loadImageFile:@"gally400x571" ofType:@"jpg"  texture:texfront2];
+  wTexFront = 400;
+  hTexFront = 566;
+  
+  [self loadImageFile:@"ironman400x611" ofType:@"jpg" texture:texback1];
+  [self loadImageFile:@"ville822x679" ofType:@"jpg" texture:texback2];
+  wTexBack = 400;
+  hTexBack = 565;
+  
 	[self loadImageFile:@"background256x256" ofType:@"jpg" texture:texbackground];
 }
 
@@ -137,6 +137,11 @@ err = glGetError();								\
     angleX = angleY = angleZ = 0.0f;
     mdx = mdy = mdz = 0.0f;
     
+    
+    // Textures on
+    texfront = texfront1;
+    texback = texback1;
+    texturesON = YES;
 		[self loadTextures];
 		[self setMultipleTouchEnabled:YES];
     
@@ -147,7 +152,7 @@ err = glGetError();								\
     commands = [[Commands alloc] initWithView3D:self];
     
     // First commands
-    NSString *modelName = @"test";
+    NSString *modelName = @"cocotte";
     NSMutableString *cde = [[NSMutableString alloc] init];
     [cde appendString:@"read "];
     [cde appendString:modelName];
@@ -155,19 +160,25 @@ err = glGetError();								\
     // Launch
     [commands commandWithNSString:cde];
     [cde release];
-    
-    // Textures on
-    texturesON = NO;
   }
   return self;
 }
 
 // Called from ChoiceController
 - (void)setPliage:(NSString *)pliage {
-  if ([pliage isEqualToString:@"notexture"])
+  if ([pliage isEqualToString:@"notexture"]){
     texturesON = NO;
-  else if ([pliage isEqualToString:@"texture"])
+  }
+  else if ([pliage isEqualToString:@"texture"]){
+    if (texfront == texfront1) {
+      texfront = texfront2;
+      texback = texback2;
+    } else {
+      texfront = texfront1;
+      texback = texback1;
+    }
     texturesON = YES;
+  }
   else {
     // Read pliage
     NSMutableString *cde = [[NSMutableString alloc] init];
@@ -181,8 +192,8 @@ err = glGetError();								\
     // Launch
     [commands commandWithNSString:cde];
     [cde release];
-    [self setMyNeedsDisplay];
   }
+  [self setMyNeedsDisplay];
 }
 
 // Called from commands 
@@ -327,7 +338,7 @@ int nbPts, nbPtsLines, previousNbPts;
   };
   const GLfloat normals[] = {
     0, 0, 1,    0, 0, 1,    0, 0, 1,
-    0, 0, 1,    0, 0, 1,    0, 0, 1,
+    0, 0, 1,    0, 0, 1,    0, 0, 1
   };
   // Begin textures
   glEnable(GL_TEXTURE_2D);
@@ -381,7 +392,7 @@ int nbPts, nbPtsLines, previousNbPts;
   }
   glFrustumf(left, right, bottom, top, near, far);
   // TODO TEST -40.0f on y ? -900.0f on z ?
-  glTranslatef(0.0f, 0.0f, -850.0f);
+  glTranslatef(0.0f, 0.0f, -900.0f);
   
   // Switch to ModelView to draw background
   glMatrixMode(GL_MODELVIEW);
@@ -524,10 +535,14 @@ int nbPts, nbPtsLines, previousNbPts;
 - (void)dealloc {
   if ([EAGLContext currentContext] == context)
     [EAGLContext setCurrentContext:nil];
-	if (textures[texfront] != 0)
-		glDeleteTextures(1, &textures[texfront]);
-  if (textures[texback] != 0)
-		glDeleteTextures(1, &textures[texback]);
+	if (textures[texfront] != 0){
+		glDeleteTextures(1, &textures[texfront1]);
+		glDeleteTextures(1, &textures[texfront2]);
+		glDeleteTextures(1, &textures[texback1]);
+		glDeleteTextures(1, &textures[texback2]);
+    glDeleteTextures(1, &textures[texbackground]);
+
+  }
   [context release];
   [model release];
   [commands release];
@@ -563,10 +578,6 @@ int nbPts, nbPtsLines, previousNbPts;
     
 		pointA = [touchA locationInView:self];
 		pointB = [touchA previousLocationInView:self];
-		
-//		float yDistance = pointA.y - pointB.y;
-		
-//		rotate += 0.5 * yDistance;
     angleX += (pointA.x - pointB.x) * 180.0f / 320;
     angleY += (pointA.y - pointB.y) * 180.0f / 320;
     

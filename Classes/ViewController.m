@@ -17,9 +17,12 @@
   if (bt.tag == 3)
     [view3D setPliage: @"austria"];
   if (bt.tag == 4)
-    [view3D setPliage: @"notexture"];
+    [view3D setPliage: @"butterfly"];
+  
   if (bt.tag == 5)
-      [view3D setPliage: @"texture"];
+    [view3D setPliage: @"notexture"];
+  if (bt.tag == 6)
+    [view3D setPliage: @"texture"];
   
   // Collapse
   [((ViewChoiceModel*)bt.nextResponder) open_or_collapse];
@@ -34,7 +37,15 @@
   
   // ViewChoiceModel => Bottom view to choose model
 	viewChoiceModel = [[ViewChoiceModel alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height-[ViewChoiceModel barHeight], self.view.frame.size.width, 174.0f)]; // 30+72+72
-  NSArray *thumbs = [NSArray arrayWithObjects: @"cocotte72x72.png", @"boat72x72.png", @"duck72x72.png", @"austria72x72.png",@"blueyellow72x72.png", @"gally72x72.png", nil];
+  NSArray *thumbs = [NSArray arrayWithObjects:
+                     @"cocotte72x72.png",
+                     @"boat72x72.png",
+                     @"duck72x72.png",
+                     @"austria72x72.png",
+                     @"butterfly72x72.png",
+                     @"blueyellow72x72.png",
+                     @"gally72x72.png",
+                     nil];
   int nthumbs = [thumbs count];
   
   // Create buttons and add them to ViewChoiceModel

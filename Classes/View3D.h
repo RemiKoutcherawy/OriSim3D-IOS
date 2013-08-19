@@ -9,13 +9,13 @@
 #import "Model.h"
 #import "Commands.h"
 
-enum
-{
-	texfront,
-	texback,
+enum {
+	texfront1, texfront2,
+	texback1,  texback2,
   texbackground,
   kNumTextures
 };
+int texfront, texback;
 
 @class Commands;
 @class Model;
