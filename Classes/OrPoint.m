@@ -1,8 +1,3 @@
-//
-//  source: src/rk/or/Point.java
-//
-//  Created by remi on 10/05/13.
-//
 // Point to hold Points
 // 3D : x y z
 // Flat CreasePattern : xf, yf

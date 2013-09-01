@@ -1,8 +1,5 @@
-//
-//  source: src/rk/or/Segment.java
-//
-//  Created by remi on 10/05/13.
-//
+// Segment to hold Segments
+// Two points p1 p2
 
 @class OrPoint;
 @class Vector3D;

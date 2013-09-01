@@ -1,8 +1,3 @@
-//
-//  source: src/rk/or/Interpolator.java
-//
-//  Created by remi on 10/05/13.
-//
 // Maps time to time
 // interpolate(tn) returns t for tn.
 // t and tn should start at 0.0 and end at 1.0

@@ -1,8 +1,3 @@
-//
-//  source: src/rk/or/Commands.java
-//
-//  Created by remi on 10/05/13.
-//
 // Commands are interpreted here
 // this class deals with animation, undo, pause with a state machine
 

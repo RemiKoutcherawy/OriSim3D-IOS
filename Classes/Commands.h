@@ -1,8 +1,5 @@
-//
-//  source: src/rk/or/Commands.java
-//
-//  Created by remi on 10/05/13.
-//
+// Commands interpretor
+
 #import "View3D.h"
 
 @class NSArray;
@@ -35,31 +32,10 @@ typedef enum State  { // : NSInteger
   id<Interpolator> interpolator;
   float angleBefore;
   float kOffset;
-//@public
-//  // States
-//  enum State  { // : NSInteger
-//    idle = 0,
-//    running = 1,
-//    anim = 2,
-//    paused = 3,
-//    undoing = 4
-//  } state;
 }
 
 @property (nonatomic, strong) View3D *view3d;
-//@property (nonatomic, strong) NSMutableArray *undo;
-//@property (nonatomic, strong) NSMutableArray *done;
-//@property (nonatomic, assign) BOOL undoInProgress;
-//@property (nonatomic, strong) NSMutableArray *todo;
-//@property (nonatomic, assign) int iTok;
-//@property (nonatomic, assign) int p;
-//@property (nonatomic, assign) int iBeginAnim;
-//@property (nonatomic, assign) float tni;
-//@property (nonatomic, assign) float tpi;
-//@property (nonatomic, assign) float *za;
 @property (nonatomic, strong) id<Interpolator> interpolator;
-//@property (nonatomic, assign) float angleBefore;
-//@property (nonatomic, assign) float kOffset;
 
 - (id)initWithView3D:(View3D *)panel;
 - (void)commandWithNSString:(NSString *)cde;

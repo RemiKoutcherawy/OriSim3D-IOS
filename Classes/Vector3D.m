@@ -1,8 +1,3 @@
-//
-//  source: src/rk/or/Vector3D.java
-//
-//  Created by remi on 10/05/13.
-//
 // A simple vector to hold 3 coordinates
 // x, y, z float values
 

@@ -1,8 +1,3 @@
-//
-//  source: src/rk/or/Model.java
-//
-//  Created by remi on 10/05/13.
-//
 // Model to hold Points, Segments, Faces
 
 #import "OrFace.h"

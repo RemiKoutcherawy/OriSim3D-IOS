@@ -1,10 +1,5 @@
-//
-//  source: src/rk/or/OrFace.java
-//
-//  Created by remi on 10/05/13.
-//
 // Face to hold points, segments, normal,
-// struts and triangles  making the face.
+// struts and triangles making the face.
 
 #import "OrFace.h"
 #import "Vector3D.h"

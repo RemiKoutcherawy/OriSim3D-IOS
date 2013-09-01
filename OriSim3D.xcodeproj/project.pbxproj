@@ -19,11 +19,9 @@
 		A528FEA617BA9BE700EB073C /* hulk400x566.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A528FEA517BA9BE600EB073C /* hulk400x566.jpg */; };
 		A54441BE174ACAE000967558 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A54441BD174ACAE000967558 /* iTunesArtwork */; };
 		A5675BCD17C149C400A6450B /* ville822x679.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5675BCC17C149C400A6450B /* ville822x679.jpg */; };
-		A5675BCF17C1584E00A6450B /* ironman400x611.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5675BCE17C1584E00A6450B /* ironman400x611.jpg */; };
 		A5675BD117C21D2400A6450B /* butterfly.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5675BD017C21D2400A6450B /* butterfly.txt */; };
 		A5675BD517C271FE00A6450B /* butterfly72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5675BD417C271FE00A6450B /* butterfly72x72.png */; };
 		A572BCA817BABCA400AD6529 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A572BCA717BABCA400AD6529 /* .gitignore */; };
-		A575D69417649DED00C15352 /* test1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A575D69317649DED00C15352 /* test1.txt */; };
 		A5D83E5E175B2FAF00EB9726 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */; };
 		A5D83E66175B2FEC00EB9726 /* Commands.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E5F175B2FEC00EB9726 /* Commands.m */; };
 		A5D83E67175B2FEC00EB9726 /* Interpolator.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E60175B2FEC00EB9726 /* Interpolator.m */; };
@@ -37,7 +35,6 @@
 		A5D83E7D175B30CA00EB9726 /* boat.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E78175B30CA00EB9726 /* boat.txt */; };
 		A5D83E7E175B30CA00EB9726 /* cocotte.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E79175B30CA00EB9726 /* cocotte.txt */; };
 		A5D83E7F175B30CA00EB9726 /* duck.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E7A175B30CA00EB9726 /* duck.txt */; };
-		A5D83E80175B30CA00EB9726 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E7B175B30CA00EB9726 /* test.txt */; };
 		A5D83E82175B30DE00EB9726 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D83E81175B30DE00EB9726 /* main.m */; };
 		A5D83E93175B311000EB9726 /* austria72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E83175B311000EB9726 /* austria72x72.png */; };
 		A5D83E94175B311000EB9726 /* background256x256.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E84175B311000EB9726 /* background256x256.jpg */; };
@@ -52,6 +49,8 @@
 		A5D83E9F175B311000EB9726 /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E8F175B311000EB9726 /* icon114x114.png */; };
 		A5D83EA0175B311000EB9726 /* icon144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E90175B311000EB9726 /* icon144x144.png */; };
 		A5D83EA2175B311000EB9726 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E92175B311000EB9726 /* Triangle.png */; };
+		A5E1E92A17D3B706006DB30C /* demon676x956.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5E1E92817D3B706006DB30C /* demon676x956.jpg */; };
+		A5E1E92B17D3B706006DB30C /* fee964x1364.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5E1E92917D3B706006DB30C /* fee964x1364.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,11 +75,9 @@
 		A528FEA517BA9BE600EB073C /* hulk400x566.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = hulk400x566.jpg; path = images/hulk400x566.jpg; sourceTree = "<group>"; };
 		A54441BD174ACAE000967558 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		A5675BCC17C149C400A6450B /* ville822x679.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ville822x679.jpg; path = images/ville822x679.jpg; sourceTree = "<group>"; };
-		A5675BCE17C1584E00A6450B /* ironman400x611.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ironman400x611.jpg; path = images/ironman400x611.jpg; sourceTree = "<group>"; };
 		A5675BD017C21D2400A6450B /* butterfly.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = butterfly.txt; path = modeles/butterfly.txt; sourceTree = "<group>"; };
 		A5675BD417C271FE00A6450B /* butterfly72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = butterfly72x72.png; path = images/butterfly72x72.png; sourceTree = "<group>"; };
 		A572BCA717BABCA400AD6529 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		A575D69317649DED00C15352 /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test1.txt; path = modeles/test1.txt; sourceTree = "<group>"; };
 		A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "images/Default-568h@2x.png"; sourceTree = "<group>"; };
 		A5D83E5F175B2FEC00EB9726 /* Commands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Commands.m; path = Classes/Commands.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A5D83E60175B2FEC00EB9726 /* Interpolator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Interpolator.m; path = Classes/Interpolator.m; sourceTree = "<group>"; };
@@ -102,7 +99,6 @@
 		A5D83E78175B30CA00EB9726 /* boat.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = boat.txt; path = modeles/boat.txt; sourceTree = "<group>"; };
 		A5D83E79175B30CA00EB9726 /* cocotte.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cocotte.txt; path = modeles/cocotte.txt; sourceTree = "<group>"; };
 		A5D83E7A175B30CA00EB9726 /* duck.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = duck.txt; path = modeles/duck.txt; sourceTree = "<group>"; };
-		A5D83E7B175B30CA00EB9726 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.txt; path = modeles/test.txt; sourceTree = "<group>"; };
 		A5D83E81175B30DE00EB9726 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Classes/main.m; sourceTree = "<group>"; };
 		A5D83E83175B311000EB9726 /* austria72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = austria72x72.png; path = images/austria72x72.png; sourceTree = "<group>"; };
 		A5D83E84175B311000EB9726 /* background256x256.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background256x256.jpg; path = images/background256x256.jpg; sourceTree = "<group>"; };
@@ -118,6 +114,8 @@
 		A5D83E90175B311000EB9726 /* icon144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon144x144.png; path = images/icon144x144.png; sourceTree = "<group>"; };
 		A5D83E92175B311000EB9726 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Triangle.png; path = images/Triangle.png; sourceTree = "<group>"; };
 		A5DE3ED017BACC6C005D5E08 /* Memo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Memo.txt; sourceTree = "<group>"; };
+		A5E1E92817D3B706006DB30C /* demon676x956.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = demon676x956.jpg; path = images/demon676x956.jpg; sourceTree = "<group>"; };
+		A5E1E92917D3B706006DB30C /* fee964x1364.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fee964x1364.jpg; path = images/fee964x1364.jpg; sourceTree = "<group>"; };
 		A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OriSim3D.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,8 +189,9 @@
 		29B97317FDCFA39411CA2CEA /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A5E1E92817D3B706006DB30C /* demon676x956.jpg */,
+				A5E1E92917D3B706006DB30C /* fee964x1364.jpg */,
 				A5675BD417C271FE00A6450B /* butterfly72x72.png */,
-				A5675BCE17C1584E00A6450B /* ironman400x611.jpg */,
 				A5675BCC17C149C400A6450B /* ville822x679.jpg */,
 				A5D83E5D175B2FAF00EB9726 /* Default-568h@2x.png */,
 				A528FEA517BA9BE600EB073C /* hulk400x566.jpg */,
@@ -236,8 +235,6 @@
 				A5D83E78175B30CA00EB9726 /* boat.txt */,
 				A5D83E79175B30CA00EB9726 /* cocotte.txt */,
 				A5D83E7A175B30CA00EB9726 /* duck.txt */,
-				A5D83E7B175B30CA00EB9726 /* test.txt */,
-				A575D69317649DED00C15352 /* test1.txt */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -324,7 +321,6 @@
 				A5D83E7D175B30CA00EB9726 /* boat.txt in Resources */,
 				A5D83E7E175B30CA00EB9726 /* cocotte.txt in Resources */,
 				A5D83E7F175B30CA00EB9726 /* duck.txt in Resources */,
-				A5D83E80175B30CA00EB9726 /* test.txt in Resources */,
 				A5D83E93175B311000EB9726 /* austria72x72.png in Resources */,
 				A5D83E94175B311000EB9726 /* background256x256.jpg in Resources */,
 				A5D83E95175B311000EB9726 /* blueyellow72x72.png in Resources */,
@@ -338,13 +334,13 @@
 				A5D83E9F175B311000EB9726 /* icon114x114.png in Resources */,
 				A5D83EA0175B311000EB9726 /* icon144x144.png in Resources */,
 				A5D83EA2175B311000EB9726 /* Triangle.png in Resources */,
-				A575D69417649DED00C15352 /* test1.txt in Resources */,
 				A528FEA617BA9BE700EB073C /* hulk400x566.jpg in Resources */,
 				A572BCA817BABCA400AD6529 /* .gitignore in Resources */,
 				A5675BCD17C149C400A6450B /* ville822x679.jpg in Resources */,
-				A5675BCF17C1584E00A6450B /* ironman400x611.jpg in Resources */,
 				A5675BD117C21D2400A6450B /* butterfly.txt in Resources */,
 				A5675BD517C271FE00A6450B /* butterfly72x72.png in Resources */,
+				A5E1E92A17D3B706006DB30C /* demon676x956.jpg in Resources */,
+				A5E1E92B17D3B706006DB30C /* fee964x1364.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +383,7 @@
 				HEADER_SEARCH_PATHS = include;
 				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = OriSim3D;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -404,7 +400,7 @@
 				HEADER_SEARCH_PATHS = include;
 				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = OriSim3D;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

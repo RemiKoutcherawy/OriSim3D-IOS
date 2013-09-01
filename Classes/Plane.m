@@ -1,7 +1,3 @@
-//
-//  source: src/rk/or/Plane.java
-//
-//  Created by remi on 10/05/13.
 // Plane defined by an origin point R and a normal vector N
 // a point P is in plane iff RP.N = 0 that is if OP.N = d with d = OR.N
 

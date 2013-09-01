@@ -1,8 +1,6 @@
-//
-//  source: src/rk/or/Interpolator.java
-//
-//  Created by remi on 10/05/13.
-//
+// Maps time to time
+// interpolate(tn) returns t for t.
+
 @class Interpolator ;
 
 @interface Interpolator : NSObject 

@@ -1,8 +1,4 @@
-//
-//  source: src/rk/or/OrFace.java
-//
-//  Created by remi on 10/05/13.
-//
+// Face to hold points, normal and offset
 
 @class NSArray;
 @class Segment;

@@ -5,11 +5,13 @@ od -1
 t 1000 r 6 -180 0 7 1)
 lol 6 9 lol 7 9
 // Plie le haut
+seg 9 11
 od -1
 t 1000 r 15 180 4 0 3)
 io t 2000 zf) il
 t 1000 r 15 -180 4 0 3)
 ob 0 1 b 0 6
+seg 9 11
 // Tourne 9 tire 0 tire 4 tire 3
 t 2000 r 9 180 9 a 0 4 3) 
 t 100 f 15 180 3 a 4)

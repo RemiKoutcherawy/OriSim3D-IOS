@@ -100,14 +100,14 @@ err = glGetError();								\
 // Load 5 textures (change is done in setPliage())
 - (void)loadTextures {
   [self loadImageFile:@"hulk400x566" ofType:@"jpg"  texture:texfront1];
-  [self loadImageFile:@"gally400x571" ofType:@"jpg"  texture:texfront2];
+  [self loadImageFile:@"ville822x679" ofType:@"jpg" texture:texback1];
   wTexFront = 400;
   hTexFront = 566;
   
-  [self loadImageFile:@"ironman400x611" ofType:@"jpg" texture:texback1];
-  [self loadImageFile:@"ville822x679" ofType:@"jpg" texture:texback2];
+  [self loadImageFile:@"demon676x956" ofType:@"jpg"  texture:texfront2];
+  [self loadImageFile:@"fee964x1364" ofType:@"jpg" texture:texback2];
   wTexBack = 400;
-  hTexBack = 565;
+  hTexBack = 566;
   
 	[self loadImageFile:@"background256x256" ofType:@"jpg" texture:texbackground];
 }
@@ -479,7 +479,7 @@ int nbPts, nbPtsLines, previousNbPts;
   // End textures
 	glDisable(GL_TEXTURE_2D);
   
-//  // Lines - a mess to get black lines => no texture no light
+// Lines - a mess to get black lines => no texture no light
   glColor4f(0.0f, 0.0f, 0.0f, 1.0f); // rgba => black
   glDisable(GL_TEXTURE_2D);
   if (linesON) {
