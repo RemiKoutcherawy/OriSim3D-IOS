@@ -145,6 +145,9 @@ err = glGetError();								\
 		[self loadTextures];
 		[self setMultipleTouchEnabled:YES];
     
+    // Lines On
+    linesON = TRUE;
+    
     // Model
     model = [[Model alloc] init] ;
     
@@ -167,8 +170,15 @@ err = glGetError();								\
 // Called from ChoiceController
 - (void)setPliage:(NSString *)pliage {
   if ([pliage isEqualToString:@"notexture"]){
-    if (texturesON == NO)
-      linesON = ~linesON;
+    // Second call
+    if (texturesON == NO) {
+      if (linesON == TRUE){
+        // No texture No Lines
+        linesON = FALSE;
+      } else {
+        linesON = TRUE;
+      }
+    }
     texturesON = NO;
   }
   else if ([pliage isEqualToString:@"texture"]){
