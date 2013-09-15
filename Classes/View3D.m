@@ -255,12 +255,14 @@ int nbPts, nbPtsLines, previousNbPts;
       // Each line has 2 points
       nbPtsLines += 2;
   }
-  if (previousNbPts != (nbPts + nbPtsLines)) {
+  if (previousNbPts != (nbPts + nbPtsLines) && nbPts != 0) {
     // Vertex for faces and lines x 3 coordinates
     if (mFVertexBuffer != nil)
       free(mFVertexBuffer);
     mFVertexBuffer = (GLfloat*) malloc((nbPts + nbPtsLines) * 3 * sizeof(GLfloat));
+
     if (texturesON) {
+      // Free old
       if (mTexBufferFront != nil)
         free(mTexBufferFront);
       if (mTexBufferBack != nil)

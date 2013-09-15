@@ -354,7 +354,6 @@
   // Iterate while length difference between 2d and 3d is > 1e-3
   // Pm is the medium point
   Vector3D *pm = [[Vector3D alloc] init];
-  int imax = 0;
   for (int i = 0; dmax > 0.001f && i < 20; i++) {
     dmax = 0;
     // Iterate over all segments
@@ -386,7 +385,6 @@
       p->y = pm->y / count;
       p->z = pm->z / count;
     }
-    imax = i;
   }
   if (isListMadeWithPoint)
     [segs dealloc];

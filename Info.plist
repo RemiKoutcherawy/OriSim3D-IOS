@@ -21,6 +21,34 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>icon80x80</string>
+				<string>icon58x58</string>
+				<string>icon29x29</string>
+				<string>icon120x120</string>
+				<string>icon57x57.png</string>
+				<string>icon114x114.png</string>
+				<string>icon72x72.png</string>
+				<string>icon144x144.png</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>icon58x58</string>
+				<string>icon29x29</string>
+				<string>icon80x80</string>
+				<string>icon40x40</string>
+				<string>icon100x100</string>
+				<string>icon50x50</string>
+				<string>icon152x152</string>
+				<string>icon76x76</string>
+				<string>icon120x120</string>
 				<string>icon57x57.png</string>
 				<string>icon114x114.png</string>
 				<string>icon72x72.png</string>

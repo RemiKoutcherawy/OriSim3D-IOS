@@ -94,7 +94,6 @@
   float e = [v2 dotWithVector3D:v2];
   float f = [v2 dotWithVector3D:r];
   if (a <= Segment_EPSILON && e <= Segment_EPSILON) {
-    t1 = t2 = 0.0f;
     [r dealloc];
     [v1 dealloc];
     [v2 dealloc];
@@ -157,7 +156,6 @@
   float e = [v2 dotWithVector3D:v2];
   float f = [v2 dotWithVector3D:r];
   if (a <= Segment_EPSILON && e <= Segment_EPSILON) {
-    t1 = t2 = 0.0f;
     Segment *seg = [[Segment alloc] initWithOrPoint:p1 withOrPoint:s->p1 withType:Segment_TEMPORARY withId:-1];
     [v1 release];
     [v2 release];
