@@ -6,7 +6,7 @@
 #import "OrPoint.h"
 #import "OrFace.h"
 
-#import "/usr/include/math.h" // Only for MAXFLOAT
+#import "math.h" // Only for MAXFLOAT
 
 @implementation OrPoint
 
