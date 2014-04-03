@@ -46,7 +46,7 @@
                      @"blueyellow72x72.png",
                      @"gally72x72.png",
                      nil];
-  int nthumbs = [thumbs count];
+  int nthumbs = (int)[thumbs count];
   
   // Create buttons and add them to ViewChoiceModel
 	for (NSInteger i = 0; i < nthumbs; i++) {

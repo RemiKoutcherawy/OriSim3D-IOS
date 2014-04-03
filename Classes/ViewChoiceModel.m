@@ -13,7 +13,7 @@ const float gBarHeight = 30.0f;
 		contentHeight = frame.size.height - gBarHeight;
 		
 		// Gradient setup for bar
-		float barColors[8] = {
+		const CGFloat barColors[8] = {
 			0.30f, 0.30f, 0.30f, 0.75f,
 			0.00f, 0.00f, 0.00f, 0.75f
 		};

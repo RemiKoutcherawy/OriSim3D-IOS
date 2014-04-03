@@ -55,8 +55,8 @@ err = glGetError();								\
 	}
 	// Get image informations
 	CGImageRef cgImage = [image CGImage];
-	int width = CGImageGetWidth(cgImage);
-	int height = CGImageGetHeight(cgImage);
+	int width = (int)CGImageGetWidth(cgImage);
+	int height = (int)CGImageGetHeight(cgImage);
   
   // Default assume power of two
   int wpot = width;

@@ -146,7 +146,7 @@
 - (BOOL)contains3dWithDouble:(double)x
                   withDouble:(double)y {
   int hits = 0;
-  int npts = [points count];
+  int npts = (int)[points count];
   OrPoint *last = [points objectAtIndex:npts - 1];
   float lastx = last->xv, lasty = last->yv;
   float curx, cury;

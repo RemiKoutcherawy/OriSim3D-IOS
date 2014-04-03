@@ -711,7 +711,7 @@
       else {
         NSLog(@"%@", [NSString stringWithFormat:@"Face contains points a,b but not the segment [a,b] jf:%@ a:%@ b:%@", jf, a, b]);
         NSLog(@"%@", [NSString stringWithFormat:@"jf->points->contains(a):%d", [jf->points containsObject:a]]);
-        NSLog(@"%@", [NSString stringWithFormat:@"jf->points->indexOf(a):%d", [jf->points indexOfObject:a]]);
+        NSLog(@"%@", [NSString stringWithFormat:@"jf->points->indexOf(a):%d", (int)[jf->points indexOfObject:a]]);
     }
   }
   // Now we can shorten s to p
@@ -773,8 +773,8 @@
   OrFace *right = nil;
   for (OrFace *f in faces) {
     // Both points are in face
-    if (((ia = [f->points indexOfObject:a]) >= 0)
-        && ((ib = [f->points indexOfObject:b]) >= 0)) {
+    if (((ia = (int)[f->points indexOfObject:a]) >= 0)
+        && ((ib = (int)[f->points indexOfObject:b]) >= 0)) {
       // a is after b, the face is on the right
       if (ia == ib + 1 || (ib == [f->points count] - 1 && ia == 0)) {
         right = f;
@@ -791,8 +791,8 @@
   OrFace *left = nil;
   for (OrFace *f in faces) {
     // Both points are in face
-    if (((ia = [f->points indexOfObject:a]) >= 0)
-        && ((ib = [f->points indexOfObject:b]) >= 0)) {
+    if (((ia = (int)[f->points indexOfObject:a]) >= 0)
+        && ((ib = (int)[f->points indexOfObject:b]) >= 0)) {
       // b is after a, the face is on the left
       if (ib == ia + 1 || (ia == [f->points count] - 1 && ib == 0)) {
         left = f;
@@ -903,15 +903,15 @@
 }
 // Debug
 - (NSString *)description {
-  NSString *sb = [NSString stringWithFormat:@"Points[%d] : ", [points count]];
+  NSString *sb = [NSString stringWithFormat:@"Points[%d] : ", (int)[points count]];
   for (OrPoint *p in points) {
     [[sb stringByAppendingFormat:@"%@", p] stringByAppendingString:@"\n"];
   }
-  [sb stringByAppendingString:[NSString stringWithFormat:@"Segments[%d] : ", [segments count]]];
+  [sb stringByAppendingString:[NSString stringWithFormat:@"Segments[%d] : ", (int)[segments count]]];
   for (Segment *s in segments ) {
       [[sb stringByAppendingFormat:@"%@",s] stringByAppendingString:@"\n"];
   }
-  [sb stringByAppendingString:[NSString stringWithFormat:@"Faces[%d] : ", [faces count]]];
+  [sb stringByAppendingString:[NSString stringWithFormat:@"Faces[%d] : ", (int)[faces count]]];
   for (OrFace *f in faces) {
       [[sb stringByAppendingFormat:@"%@",f] stringByAppendingString:@"\n"];
   }
