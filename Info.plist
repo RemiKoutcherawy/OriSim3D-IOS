@@ -59,7 +59,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>fr.rk.${PRODUCT_NAME:identifier}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
