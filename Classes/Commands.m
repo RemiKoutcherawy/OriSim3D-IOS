@@ -2,7 +2,7 @@
 // this class deals with animation, undo, pause with a state machine
 
 #import "Commands.h"
-#import "model.h"
+#import "Model.h"
 #import "OrFace.h"
 #import "Segment.h"
 #import "OrPoint.h"
