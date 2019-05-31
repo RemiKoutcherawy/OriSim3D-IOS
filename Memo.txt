@@ -1,0 +1,30 @@
+Après clonage, penser à télécharger les certificats.
+Xcode / Préférences / Accounts / Clic sur + en bas à gauche et ajouter le compte dévelopeur.
+Manage certificates affiche "Not in keychain"
+
+Product / Build Faild
+"OriSim3D" requires a provisioning profile. Select a provisioning profile for the "Debug" build configuration ..."
+Clic sur la racine "OriSim3D" en haut à gauche dans Project Navigator.
+Puis Project / Basic / Build Settings /
+- Development Team : selectionner le profil
+- Code Signing Identities  sélectionner le profil téléchargé.
+
+Product / Build Faild
+"Code Signing Warning: "OriSim3D" isn't code signed but requires entitlements. It is not possible to add entitlements to a binary without signing it."
+"Code Signing Error: No signing certificate "iOS Development" found:  No "iOS Development" signing certificate matching team ID "2GS622B44D" with a private key was found.
+
+Mettre à jour Xcode
+https://itunes.apple.com/fr/app/xcode/id497799835?mt=12
+
+duplicate symbol _texfront in: [...]
+ld: 8 duplicate symbols for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+A gauche clic sur OriSim3D
+A droite Projet OriSim3D / Build Settings
+En bas Apple Clang Code Generation (6e en Basic, 17e en All)
+ No Common Blocks => NO
+cf.https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f24298144%2fduplicate-symbols-for-architecture-x86-64-under-xcode
+ Project Target > Build Setting > No Common Blocks
+
+
