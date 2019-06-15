@@ -19,12 +19,12 @@ https://itunes.apple.com/fr/app/xcode/id497799835?mt=12
 duplicate symbol _texfront in: [...]
 ld: 8 duplicate symbols for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
+Au lieu de "int _texfront" lire "extern int _texfront" dans View3D.h
+et déclarer "int texfront, texback;" dans Wiew3D.m
 
-A gauche clic sur OriSim3D
-A droite Projet OriSim3D / Build Settings
+Sinon à gauche clic sur OriSim3D
+à droite Projet OriSim3D / Build Settings
 En bas Apple Clang Code Generation (6e en Basic, 17e en All)
  No Common Blocks => NO
 cf.https://stackoverflow.com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2fquestions%2f24298144%2fduplicate-symbols-for-architecture-x86-64-under-xcode
  Project Target > Build Setting > No Common Blocks
-
-

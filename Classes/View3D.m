@@ -21,6 +21,7 @@ err = glGetError();								\
 }
 
 @implementation View3D
+    int texfront, texback;
 
 + (Class) layerClass {
   return [CAEAGLLayer class];
@@ -29,7 +30,6 @@ err = glGetError();								\
 @synthesize context;
 @synthesize commands;
 @synthesize model;      // model is my Model not the one defined in UIDevice
-
 
 // Return true if not a power of two
 - (BOOL) isNotPower2:(int) n {

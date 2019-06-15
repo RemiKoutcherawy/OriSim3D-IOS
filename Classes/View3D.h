@@ -15,7 +15,8 @@ enum {
   texbackground,
   kNumTextures
 };
-int texfront, texback;
+// Implemented in View3D.m
+extern int texfront, texback;
 
 @class Commands;
 @class Model;
