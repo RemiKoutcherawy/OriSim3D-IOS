@@ -11,8 +11,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28FD14FE0DC6FC130079059D /* View3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* View3D.m */; };
-		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
-		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		49930EC30E92E683003FE459 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49930EC20E92E683003FE459 /* ViewController.m */; };
 		49930EDA0E92E95C003FE459 /* ViewChoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49930ED90E92E95C003FE459 /* ViewChoiceModel.m */; };
 		49930EF80E92F42C003FE459 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49930EF70E92F42C003FE459 /* CoreGraphics.framework */; };
@@ -59,6 +57,7 @@
 		A5D83EA2175B311000EB9726 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E92175B311000EB9726 /* Triangle.png */; };
 		A5E1E92A17D3B706006DB30C /* demon676x956.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5E1E92817D3B706006DB30C /* demon676x956.jpg */; };
 		A5E1E92B17D3B706006DB30C /* fee964x1364.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5E1E92917D3B706006DB30C /* fee964x1364.jpg */; };
+		A5FA65782F825E8100B19F32 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = A5FA65772F825E5B00B19F32 /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,8 +68,6 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FC0DC6FC130079059D /* View3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View3D.h; sourceTree = "<group>"; };
 		28FD14FD0DC6FC130079059D /* View3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = View3D.m; sourceTree = "<group>"; };
-		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* OriSim3D_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriSim3D_Prefix.pch; sourceTree = "<group>"; };
 		49930EC10E92E683003FE459 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		49930EC20E92E683003FE459 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -79,7 +76,6 @@
 		49930EF70E92F42C003FE459 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A51ADA1A17BAC39D009B678B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		A51DBD9B17B031480061B9CF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A528FEA517BA9BE600EB073C /* hulk400x566.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = hulk400x566.jpg; path = images/hulk400x566.jpg; sourceTree = "<group>"; };
 		A54441BD174ACAE000967558 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		A55DDD4617E606B7008D15B9 /* icon120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon120x120.png; path = images/icon120x120.png; sourceTree = "<group>"; };
@@ -130,10 +126,10 @@
 		A5D83E8F175B311000EB9726 /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114x114.png; path = images/icon114x114.png; sourceTree = "<group>"; };
 		A5D83E90175B311000EB9726 /* icon144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon144x144.png; path = images/icon144x144.png; sourceTree = "<group>"; };
 		A5D83E92175B311000EB9726 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Triangle.png; path = images/Triangle.png; sourceTree = "<group>"; };
-		A5DE3ED017BACC6C005D5E08 /* Memo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Memo.txt; sourceTree = "<group>"; };
 		A5E1E92817D3B706006DB30C /* demon676x956.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = demon676x956.jpg; path = images/demon676x956.jpg; sourceTree = "<group>"; };
 		A5E1E92917D3B706006DB30C /* fee964x1364.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fee964x1364.jpg; path = images/fee964x1364.jpg; sourceTree = "<group>"; };
 		A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OriSim3D.entitlements; sourceTree = "<group>"; };
+		A5FA65772F825E5B00B19F32 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +139,6 @@
 			files = (
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
-				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
 				49930EF80E92F42C003FE459 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +149,7 @@
 		080E96DDFE201D6D7F000001 /* rk.ios */ = {
 			isa = PBXGroup;
 			children = (
+				A5FA65772F825E5B00B19F32 /* Shaders.metal */,
 				28FD14FC0DC6FC130079059D /* View3D.h */,
 				28FD14FD0DC6FC130079059D /* View3D.m */,
 				49930ED80E92E95C003FE459 /* ViewChoiceModel.h */,
@@ -180,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				A51ADA1A17BAC39D009B678B /* README.md */,
-				A5DE3ED017BACC6C005D5E08 /* Memo.txt */,
 				A572BCA717BABCA400AD6529 /* .gitignore */,
 				A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */,
 				080E96DDFE201D6D7F000001 /* rk.ios */,
@@ -244,11 +238,8 @@
 			isa = PBXGroup;
 			children = (
 				49930EF70E92F42C003FE459 /* CoreGraphics.framework */,
-				28FD15070DC6FC5B0079059D /* QuartzCore.framework */,
-				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				A51DBD9B17B031480061B9CF /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -314,10 +305,11 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 2GS622B44D;
+						LastSwiftMigration = 1530;
 					};
 				};
 			};
@@ -394,6 +386,7 @@
 				28FD14FE0DC6FC130079059D /* View3D.m in Sources */,
 				49930EC30E92E683003FE459 /* ViewController.m in Sources */,
 				49930EDA0E92E95C003FE459 /* ViewChoiceModel.m in Sources */,
+				A5FA65782F825E8100B19F32 /* Shaders.metal in Sources */,
 				A5D83E66175B2FEC00EB9726 /* Commands.m in Sources */,
 				A5D83E67175B2FEC00EB9726 /* Interpolator.m in Sources */,
 				A5D83E68175B2FEC00EB9726 /* OrFace.m in Sources */,
@@ -412,17 +405,20 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_MODULES_AUTOLINK = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = OriSim3D.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 2GS622B44D;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -430,9 +426,13 @@
 				HEADER_SEARCH_PATHS = include;
 				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				INFOPLIST_KEY_CFBundleDisplayName = OriSim3D;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.rk.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = OriSim3D;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OriSim3D-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -440,26 +440,33 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_MODULES_AUTOLINK = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = OriSim3D.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 2GS622B44D;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = OriSim3D_Prefix.pch;
 				HEADER_SEARCH_PATHS = include;
 				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				INFOPLIST_KEY_CFBundleDisplayName = OriSim3D;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.rk.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = OriSim3D;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OriSim3D-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -467,6 +474,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -491,6 +499,7 @@
 				DEVELOPMENT_TEAM = 2GS622B44D;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -499,11 +508,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "fa7d3f89-e8ca-46a7-bf4e-ef38505de6d2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "fa7d3f89-e8ca-46a7-bf4e-ef38505de6d2";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -511,6 +521,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -535,6 +546,7 @@
 				DEVELOPMENT_TEAM = 2GS622B44D;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -543,11 +555,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "fa7d3f89-e8ca-46a7-bf4e-ef38505de6d2";
 				"PROVISIONING_PROFILE[sdk=*]" = "fa7d3f89-e8ca-46a7-bf4e-ef38505de6d2";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

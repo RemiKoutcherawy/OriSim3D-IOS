@@ -1,5 +1,4 @@
-#import <QuartzCore/QuartzCore.h>
-#import <OpenGLES/EAGLDrawable.h>
+#import <MetalKit/MetalKit.h>
 #import <math.h>
 
 #import "View3D.h"
@@ -9,43 +8,41 @@
 #import "OrPoint.h"
 #import "Vector3D.h"
 #import "Segment.h"
-
-#define GetGLError()									\
-{														\
-GLenum err = glGetError();							\
-while (err != GL_NO_ERROR) {						\
-NSLog(@"GLError set in File:%s Line:%d\n",	\
-__FILE__,	__LINE__);								\
-err = glGetError();								\
-}													\
+typedef struct {
+  simd_float4x4 mvp;
+  simd_float4 color;
+  uint32_t useTexture;
+} Uniforms;
+static simd_float4x4 matFrustum(float l, float r, float b, float t, float n, float f) {
+  return (simd_float4x4){{
+    {2*n/(r-l), 0, 0, 0},
+    {0, 2*n/(t-b), 0, 0},
+    {(r+l)/(r-l), (t+b)/(t-b), -f/(f-n), -1},
+    {0, 0, -f*n/(f-n), 0}
+  }};
 }
-
+static simd_float4x4 matTranslate(float x, float y, float z) {
+  simd_float4x4 m = matrix_identity_float4x4;
+  m.columns[3] = simd_make_float4(x, y, z, 1);
+  return m;
+}
+static simd_float4x4 matRotate(float deg, float x, float y, float z) {
+  float a = deg * M_PI / 180.0f;
+  float c = cosf(a), s = sinf(a);
+  simd_float3 ax = simd_normalize(simd_make_float3(x, y, z));
+  simd_float4x4 m = matrix_identity_float4x4;
+  m.columns[0] = simd_make_float4(c + ax.x*ax.x*(1-c),   ax.y*ax.x*(1-c)+ax.z*s, ax.z*ax.x*(1-c)-ax.y*s, 0);
+  m.columns[1] = simd_make_float4(ax.x*ax.y*(1-c)-ax.z*s, c + ax.y*ax.y*(1-c),   ax.z*ax.y*(1-c)+ax.x*s, 0);
+  m.columns[2] = simd_make_float4(ax.x*ax.z*(1-c)+ax.y*s, ax.y*ax.z*(1-c)-ax.x*s, c + ax.z*ax.z*(1-c),  0);
+  return m;
+}
 @implementation View3D
     int texfront, texback;
 
-+ (Class) layerClass {
-  return [CAEAGLLayer class];
-}
-
-@synthesize context;
 @synthesize commands;
-@synthesize model;      // model is my Model not the one defined in UIDevice
+@synthesize model; // model is my Model not the one defined in UIDevice
 
-// Return true if not a power of two
-- (BOOL) isNotPower2:(int) n {
-  return 2*n != (n ^ (n-1)) + 1;
-}
-// Find the smallest power of two >= the input value.
-- (int) roundUpPower2:(int) x
-{
-  x = x - 1;
-  x = x | (x >> 1);  x = x | (x >> 2);
-  x = x | (x >> 4);  x = x | (x >> 8);
-  x = x | (x >>16);
-  return x + 1;
-}
-
-// Load image, pad it to the next power of two
+// Load image
 - (void)loadImageFile:(NSString *)name ofType:(NSString *)extension texture:(uint32_t)texture {
   // Load original
   UIImage *image =[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:extension]];
@@ -57,17 +54,8 @@ err = glGetError();								\
 	CGImageRef cgImage = [image CGImage];
 	int width = (int)CGImageGetWidth(cgImage);
 	int height = (int)CGImageGetHeight(cgImage);
-  
-  // Default assume power of two
   int wpot = width;
   int hpot = height;
-  
-  // Check if w or h is not a power of two, then round up to next POT
-  if ([self isNotPower2:width] || [self isNotPower2:height]){
-    // Extend dimensions to power of two
-    wpot = [self roundUpPower2:width];
-    hpot = [self roundUpPower2:height];
-  }
 
   // Create new bitmap
   GLubyte *data = (GLubyte *)malloc(wpot * hpot * 4); // GL_RGBA : 4 bytes per pixel
@@ -75,26 +63,29 @@ err = glGetError();								\
   CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
   // GL_RGBA 8 bits per component, 4 components => 4 bytes per pixel
   // RGB 32 bpp, 8 bpc, kCGImageAlphaPremultipliedLast Mac OS X, iO => OK
-	CGContextRef cgContext = CGBitmapContextCreate(data, wpot, hpot, 8, 4*wpot, colorSpace, kCGImageAlphaPremultipliedLast);
+    CGContextRef cgContext = CGBitmapContextCreate(data, wpot, hpot, 8, 4*wpot, colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
+    if (!cgContext) {
+        CGColorSpaceRelease(colorSpace);
+        free(data);
+        return;
+    }
   // Set the blend mode to copy.
-  CGContextSetBlendMode(cgContext, kCGBlendModeCopy);
-  // Draw upsidedown (the 0,0 is bottom left in OpenGL, top left in CGContext draw)
-  CGContextTranslateCTM(cgContext, 0.0, hpot);
-  CGContextScaleCTM(cgContext, 1, -1);
-  // Begin at the top (bottom in OpenGL) with original size keep ratio
-  // Tiled ? Textures use GL_REPEAT so 1=>hpot should point to a cropped h not a tiled
-  CGContextDrawTiledImage(cgContext, CGRectMake(0, 0, wpot, hpot), cgImage);
+
+  // Draw
+  CGContextDrawImage(cgContext, CGRectMake(0, 0, wpot, hpot), cgImage);
   // Release
   CGContextRelease(cgContext);
-	CGColorSpaceRelease(colorSpace);
-  
+  CGColorSpaceRelease(colorSpace);
+
   // Generate texture
-  glGenTextures(1, &(textures[texture]));
-  glBindTexture(GL_TEXTURE_2D, textures[texture]);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, wpot, hpot, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-  
-	free(data);
+    MTLTextureDescriptor *desc = [MTLTextureDescriptor
+      texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm
+      width:wpot height:hpot mipmapped:NO];
+    textures[texture] = [mtlDevice newTextureWithDescriptor:desc];
+    MTLRegion region = MTLRegionMake2D(0, 0, wpot, hpot);
+    [textures[texture] replaceRegion:region mipmapLevel:0
+      withBytes:data bytesPerRow:4 * wpot];
+    free(data);
 }
 
 // Load 5 textures (change is done in setPliage())
@@ -103,68 +94,79 @@ err = glGetError();								\
   [self loadImageFile:@"ville822x679" ofType:@"jpg" texture:texback1];
   wTexFront = 400;
   hTexFront = 566;
-  
+
   [self loadImageFile:@"demon676x956" ofType:@"jpg"  texture:texfront2];
   [self loadImageFile:@"fee964x1364" ofType:@"jpg" texture:texback2];
   wTexBack = 400;
   hTexBack = 566;
-  
+
 	[self loadImageFile:@"background256x256" ofType:@"jpg" texture:texbackground];
 }
 
 // Init with frame
 - (id)initWithFrame:(CGRect)frame {
-  if ((self = [super initWithFrame:frame])) {
-    // Get the layer
-    eaglLayer = (CAEAGLLayer *)super.layer;
-    eaglLayer.opaque = YES;
-    eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
-    backingWidth = CGRectGetWidth(frame);
-    backingHeight = CGRectGetHeight(frame);
-    
-    // init context
-    context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
-    if (!context || ![EAGLContext setCurrentContext:context]) {
-      NSLog(@"View3D initWithFrame failed");
-      [self release];
-      return nil;
-    }
-    
-    // To trigger OpenGL rendering
-    displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawView:)];
-    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+  mtlDevice = MTLCreateSystemDefaultDevice();
+  if ((self = [super initWithFrame:frame device:mtlDevice])) {
+    self.delegate = self;
+    self.colorPixelFormat = MTLPixelFormatBGRA8Unorm;
+    self.depthStencilPixelFormat = MTLPixelFormatDepth32Float;
+    self.clearColor = MTLClearColorMake(0.5, 0.5, 0.5, 1.0);
+    self.paused = YES;
+    self.enableSetNeedsDisplay = NO;
+    commandQueue = [mtlDevice newCommandQueue];
+    [self buildPipelines];
+    [self buildDepthStencilState];
     angleX = angleY = angleZ = 0.0f;
     mdx = mdy = mdz = 0.0f;
-    
-    
-    // Textures on
     texfront = texfront1;
     texback = texback1;
     texturesON = YES;
-		[self loadTextures];
-		[self setMultipleTouchEnabled:YES];
-    
-    // Lines On
+    [self loadTextures];
+    [self setMultipleTouchEnabled:YES];
     linesON = TRUE;
-    
-    // Model
-    model = [[Model alloc] init] ;
-    
-    // Commands
+    model = [[Model alloc] init];
     commands = [[Commands alloc] initWithView3D:self];
-    
-    // First commands
-    NSString *modelName = @"cocotte";
     NSMutableString *cde = [[NSMutableString alloc] init];
-    [cde appendString:@"read "];
-    [cde appendString:modelName];
-    
-    // Launch
+    [cde appendString:@"read cocotte"];
     [commands commandWithNSString:cde];
     [cde release];
   }
   return self;
+}
+- (void)buildPipelines {
+  id<MTLLibrary> library = [mtlDevice newDefaultLibrary];
+  MTLRenderPipelineDescriptor *desc = [[MTLRenderPipelineDescriptor alloc] init];
+  desc.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+  desc.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float;
+  desc.vertexFunction = [library newFunctionWithName:@"vertexTextured"];
+  desc.fragmentFunction = [library newFunctionWithName:@"fragmentTextured"];
+  NSError *err = nil;
+  pipelineTextured = [mtlDevice newRenderPipelineStateWithDescriptor:desc error:&err];
+  if (err) NSLog(@"pipelineTextured error: %@", err);
+  desc.vertexFunction = [library newFunctionWithName:@"vertexColored"];
+  desc.fragmentFunction = [library newFunctionWithName:@"fragmentColored"];
+  pipelineColored = [mtlDevice newRenderPipelineStateWithDescriptor:desc error:&err];
+  if (err) NSLog(@"pipelineColored error: %@", err);
+    MTLSamplerDescriptor *sd = [[MTLSamplerDescriptor alloc] init];
+    sd.minFilter = MTLSamplerMinMagFilterLinear;
+    sd.magFilter = MTLSamplerMinMagFilterLinear;
+    sd.sAddressMode = MTLSamplerAddressModeRepeat;
+    sd.tAddressMode = MTLSamplerAddressModeRepeat;
+    samplerRepeat = [mtlDevice newSamplerStateWithDescriptor:sd];
+    sd.sAddressMode = MTLSamplerAddressModeClampToEdge;
+    sd.tAddressMode = MTLSamplerAddressModeClampToEdge;
+    samplerLinear = [mtlDevice newSamplerStateWithDescriptor:sd];
+    [sd release];
+  [desc release];
+  [library release];
+}
+
+- (void)buildDepthStencilState {
+  MTLDepthStencilDescriptor *desc = [[MTLDepthStencilDescriptor alloc] init];
+  desc.depthCompareFunction = MTLCompareFunctionLess;
+  desc.depthWriteEnabled = YES;
+  depthStencilState = [mtlDevice newDepthStencilStateWithDescriptor:desc];
+  [desc release];
 }
 
 // Called from ChoiceController
@@ -196,11 +198,11 @@ err = glGetError();								\
     NSMutableString *cde = [[NSMutableString alloc] init];
     [cde appendString:@"read "];
     [cde appendString:pliage];
-    
+
     // Restore view
     angleX = angleY = angleZ = 0.0f;
     mdx = mdy = mdz = 0.0f;
-    
+
     // Launch
     [commands commandWithNSString:cde];
     [cde release];
@@ -208,22 +210,21 @@ err = glGetError();								\
   [self setMyNeedsDisplay];
 }
 
-// Called from commands 
-- (void) setMyNeedsDisplay {
-  displayLink.paused = FALSE;
+// Called from commands
+- (void)setMyNeedsDisplay {
+  self.paused = NO;
 }
 
-// Called by sytem
-- (void) drawView:(CADisplayLink *)displayLinka {
+- (void)drawInMTKView:(MTKView *)view {
   [self drawModel];
-  [context presentRenderbuffer:GL_RENDERBUFFER_OES];
-  displayLink.paused = YES; 
-  
-  // Call back Commands if animated
+  self.paused = YES;
   if (animated) {
     animated = [commands anim];
     [self setMyNeedsDisplay];
   }
+}
+
+- (void)mtkView:(MTKView *)view drawableSizeWillChange:(CGSize)size {
 }
 
 // Called by Commands when animation needs a redraw
@@ -233,338 +234,201 @@ err = glGetError();								\
   [self setMyNeedsDisplay];
 }
 
-GLfloat *mFVertexBuffer = nil;
-GLfloat *mTexBufferFront=nil, *mTexBufferBack=nil;
-int nbPts, nbPtsLines, previousNbPts;
-
 // Initialize from model
 // Called by onDrawFrame each time the model need to be drawn
-// The buffers are allocated only if the number of points changed
-// The points are copied to the buffers
-- (void) initFromModel {
-  // Number of points, for each point of each face add 3 coord points
+- (void)initFromModel {
   nbPts = 0;
-  for (OrFace *f in model->faces){
+  for (OrFace *f in model->faces)
     for (int i = 2; i < [f->points count]; i++)
-      // Each time we add one point, we add a triangle with 3 points
       nbPts += 3;
-  }
   nbPtsLines = 0;
-  for (Segment *s in model->segments) {
+  for (Segment *s in model->segments)
     if (s->select || !texturesON)
-      // Each line has 2 points
       nbPtsLines += 2;
+  totalPts = nbPts + nbPtsLines;
+  if (totalPts == 0) return;
+  if (previousNbPts != totalPts) {
+    vertexBuffer  = [mtlDevice newBufferWithLength:totalPts * 3 * sizeof(float) options:MTLResourceStorageModeShared];
+    texBufferFront = [mtlDevice newBufferWithLength:nbPts * 2 * sizeof(float) options:MTLResourceStorageModeShared];
+    texBufferBack  = [mtlDevice newBufferWithLength:nbPts * 2 * sizeof(float) options:MTLResourceStorageModeShared];
+    previousNbPts = totalPts;
   }
-  if (previousNbPts != (nbPts + nbPtsLines) && nbPts != 0) {
-    // Vertex for faces and lines x 3 coordinates
-    if (mFVertexBuffer != nil)
-      free(mFVertexBuffer);
-    mFVertexBuffer = (GLfloat*) malloc((nbPts + nbPtsLines) * 3 * sizeof(GLfloat));
+  float *vb = (float *)vertexBuffer.contents;
+  float *tf = (float *)texBufferFront.contents;
+  float *tb = (float *)texBufferBack.contents;
+  int ip = 0, it = 0;
+    for (OrFace *f in model->faces) {
+        NSArray *pts = f->points;
+        [f computeFaceNormal];
+        Vector3D *n = f->normal;
+        OrPoint *c = [pts objectAtIndex:0];
+        OrPoint *p = [pts objectAtIndex:1];
+        for (int i = 2; i < [pts count]; i++) {
+            OrPoint *s = [f->points objectAtIndex:i];
+            vb[ip++]=c->x+f->offset*n->x;
+            vb[ip++]=c->y+f->offset*n->y;
+            vb[ip++]=c->z+f->offset*n->z;
+            tf[it]=(200+c->xf)/wTexFront;
+            tf[it+1]=(hTexFront-200-c->yf)/hTexFront;
+            tb[it]=(200+c->xf)/wTexBack;
+            tb[it+1]=(hTexBack-200-c->yf)/hTexBack;
+            it+=2;
 
-    if (texturesON) {
-      // Free old
-      if (mTexBufferFront != nil)
-        free(mTexBufferFront);
-      if (mTexBufferBack != nil)
-        free(mTexBufferBack);
-      
-      // Texture coordinates for each point of faces x 2 coordinates x 4 bytes
-      mTexBufferFront = (GLfloat*) malloc(nbPts * 2 * sizeof(GLfloat));
-      mTexBufferBack = (GLfloat*) malloc(nbPts * 2 * sizeof(GLfloat));
-    }
-  }
-  previousNbPts = (nbPts + nbPtsLines);
+            vb[ip++]=p->x+f->offset*n->x;
+            vb[ip++]=p->y+f->offset*n->y;
+            vb[ip++]=p->z+f->offset*n->z;
+            tf[it]=(200+p->xf)/wTexFront;
+            tf[it+1]=(hTexFront-200-p->yf)/hTexFront;
+            tb[it]=(200+p->xf)/wTexBack;
+            tb[it+1]=(hTexBack-200-p->yf)/hTexBack;
+            it+=2;
 
-  short indexPts = 0;
-  short indexPtsLines = 0;
-  short indexTex = 0;
-  
-  // Put Faces
-  for (OrFace *f in model->faces) {
-    NSArray *pts = f->points;
-    [f computeFaceNormal];
-    Vector3D *n = f->normal;
-    // Triangle FAN can be used only because of convex CCW face
-    // using GL_TRIANGLE_FAN would simplify
-    OrPoint *c = [pts objectAtIndex:0]; // center
-    OrPoint *p = [pts objectAtIndex:1]; // previous
-    for (int i = 2; i < [pts count]; i++) {
-      OrPoint *s = [f->points objectAtIndex:i]; // second
-      mFVertexBuffer[indexPts++] = c->x + f->offset * n->x;
-      mFVertexBuffer[indexPts++] = c->y + f->offset * n->y;
-      mFVertexBuffer[indexPts++] = c->z + f->offset * n->z;
-      if (texturesON) {
-        mTexBufferFront[indexTex] = (200 + c->xf)/wTexFront;
-        mTexBufferFront[indexTex+1] = (200 + c->yf)/hTexFront;
-        mTexBufferBack[indexTex++] = (200 + c->xf)/wTexBack;
-        mTexBufferBack[indexTex++] = (hTexBack -200 - c->yf)/hTexBack;
-      }
-      mFVertexBuffer[indexPts++] = p->x + f->offset * n->x;
-      mFVertexBuffer[indexPts++] = p->y + f->offset * n->y;
-      mFVertexBuffer[indexPts++] = p->z + f->offset * n->z;
-      if (texturesON) {
-        mTexBufferFront[indexTex] = (200 + p->xf)/wTexFront;
-        mTexBufferFront[indexTex+1] = (200 + p->yf)/hTexFront;
-        mTexBufferBack[indexTex++] = (200 + p->xf)/wTexBack;
-        mTexBufferBack[indexTex++] = (hTexBack -200 - p->yf)/hTexBack;
-      }
-      mFVertexBuffer[indexPts++] = s->x + f->offset * n->x;
-      mFVertexBuffer[indexPts++] = s->y + f->offset * n->y;
-      mFVertexBuffer[indexPts++] = s->z + f->offset * n->z;
-      if (texturesON) {
-        mTexBufferFront[indexTex] = (200 + s->xf)/wTexFront;
-        mTexBufferFront[indexTex+1] = (200 + s->yf)/hTexFront;
-        mTexBufferBack[indexTex++] = (200 + s->xf)/wTexBack;
-        mTexBufferBack[indexTex++] = (hTexBack -200 - s->yf)/hTexBack;
-      }
-      p = s; // next triangle
+            vb[ip++]=s->x+f->offset*n->x;
+            vb[ip++]=s->y+f->offset*n->y;
+            vb[ip++]=s->z+f->offset*n->z;
+            tf[it]=(200+s->xf)/wTexFront;
+            tf[it+1]=(hTexFront-200-s->yf)/hTexFront;
+            tb[it]=(200+s->xf)/wTexBack;
+            tb[it+1]=(hTexBack-200-s->yf)/hTexBack;
+            it+=2;
+
+            p = s; // next triangle
+        }
     }
-  }
-  // Put segments in the same vertex buffer, only index is different
-  indexPtsLines = indexPts; // start where we left
-  for (Segment *s in model->segments) {
-    if (s->select || !texturesON) {
-      mFVertexBuffer[indexPtsLines++]=s->p1->x;
-      mFVertexBuffer[indexPtsLines++]=s->p1->y;
-      mFVertexBuffer[indexPtsLines++]=s->p1->z;
-      mFVertexBuffer[indexPtsLines++]=s->p2->x;
-      mFVertexBuffer[indexPtsLines++]=s->p2->y;
-      mFVertexBuffer[indexPtsLines++]=s->p2->z;
+    for (Segment *s in model->segments) {
+        if (s->select || !texturesON) {
+            vb[ip++]=s->p1->x;
+            vb[ip++]=s->p1->y;
+            vb[ip++]=s->p1->z;
+            vb[ip++]=s->p2->x;
+            vb[ip++]=s->p2->y;
+            vb[ip++]=s->p2->z;
+        }
     }
-  }
 }
 
 // Setup background arrays
-- (void) drawBackground {
-  // Background 2 triangles =  6 Vertex(3), 6 Normal(3)  6 Texture(2)
-  const GLfloat vertices[] = {
-    -2000.0f, -2000.0f, -2000.0f,
-    2000.0f, 2000.0f, -2000.0f,
-    -2000.0f, 2000.0f, -2000.0f,
-    
-    -2000.0f, -2000.0f, -2000.0f,
-    2000.0f, -2000.0f, -2000.0f,
-    2000.0f, 2000.0f, -2000.0f
+- (void)drawBackground:(id<MTLRenderCommandEncoder>)encoder mvp:(simd_float4x4)mvp {
+  static const float verts[] = {
+    -2000,-2000,-2000,  2000, 2000,-2000, -2000, 2000,-2000,
+    -2000,-2000,-2000,  2000,-2000,-2000,  2000, 2000,-2000
   };
-  const GLfloat texCoords[] = {
-    0, 0,    10, 10,    0, 10,
-    0, 0,    10, 0,    10, 10
+  static const float uvs[] = {
+    0,0,  10,10,  0,10,
+    0,0,  10,0,   10,10
   };
-  const GLfloat normals[] = {
-    0, 0, 1,    0, 0, 1,    0, 0, 1,
-    0, 0, 1,    0, 0, 1,    0, 0, 1
-  };
-  // Begin textures
-  glEnable(GL_TEXTURE_2D);
-  glFrontFace(GL_CCW);
-  
-  // Vertex
-  glVertexPointer(3, GL_FLOAT, 0, vertices);
-  glEnableClientState(GL_VERTEX_ARRAY);
-
-  // Normals
-  glNormalPointer(GL_FLOAT, 0, normals);
-  glEnableClientState(GL_NORMAL_ARRAY);
-  
-  // Textures
-  glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glBindTexture(GL_TEXTURE_2D, textures[texbackground]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-  // Render
-  glDrawArrays(GL_TRIANGLES, 0, 6);
-  
-  // End textures
-  glDisable(GL_TEXTURE_2D);
+  Uniforms u;
+  u.mvp = mvp;
+  u.color = simd_make_float4(1,1,1,1);
+  u.useTexture = 1;
+  [encoder setRenderPipelineState:pipelineTextured];
+  [encoder setDepthStencilState:depthStencilState];
+  [encoder setCullMode:MTLCullModeNone];
+  [encoder setFrontFacingWinding:MTLWindingCounterClockwise];
+  [encoder setVertexBytes:verts length:sizeof(verts) atIndex:0];
+  [encoder setVertexBytes:uvs length:sizeof(uvs) atIndex:1];
+  [encoder setVertexBytes:&u length:sizeof(Uniforms) atIndex:2];
+  [encoder setFragmentBytes:&u length:sizeof(Uniforms) atIndex:2];
+  [encoder setFragmentTexture:textures[texbackground] atIndex:0];
+  [encoder setFragmentSamplerState:samplerRepeat atIndex:0];
+  [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
 }
 
 // Main drawing
-- (void) drawModel {
-
-  // A rectangle 400x572 -200+200 x -286+286
-  [EAGLContext setCurrentContext:context];  
-  glViewport(0, 0, backingWidth, backingHeight);
-  
-  // Projection
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  float ratio = (float) backingWidth / backingHeight, fov = 30.0f, near = 60, far = 12000, top, bottom, left, right;
-  if (ratio >= 1.0f){
-    top = near * (float) tan(fov * (M_PI / 360.0));
-    bottom = -top;
-    left = bottom * ratio;
-    right = top * ratio;
-  } else {
-    right = near * (float) tan(fov * (M_PI / 360.0));
-    left = -right;
-    top = right / ratio;
-    bottom = left / ratio;
-  }
-  glFrustumf(left, right, bottom, top, near, far);
-  // TODO TEST -40.0f on y ? -900.0f on z ?
-  glTranslatef(0.0f, 0.0f, -900.0f);
-  
-  // Switch to ModelView to draw background
-  glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-  // Clear
-  glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  
-  // Draw Background
-  [self drawBackground];
-  
-  // Handle finger rotation (in GL_MODELVIEW )
-  glRotatef(angleX, 0, 1, 0);// Yes there is an inversion between X and Y
-  glRotatef(angleY, 1, 0, 0);
-  
-  // Switch to Projection to handle rotation
-  glMatrixMode(GL_PROJECTION);
-  glPopMatrix();
-  glPushMatrix();
-  
-  // Handle finger zoom, move, rotate on Z (in GL_PROJECTION)
-  glRotatef(angleZ, 0, 0, 1);
-  glTranslatef(mdx, mdy, mdz);
-  
-  // Switch to ModelView to draw model
-  glMatrixMode(GL_MODELVIEW);
-  
-  // Draw only one side of triangle
-  glEnable(GL_CULL_FACE);
-  
-  // Set points arrays *mFVertexBuffer
-  // Set texture arrays *mTexBufferFront, *mTextBufferBack from model
+- (void)drawModel {
+  id<MTLCommandBuffer> cmdBuffer = [commandQueue commandBuffer];
+  MTLRenderPassDescriptor *rpd = self.currentRenderPassDescriptor;
+  if (!rpd) { [cmdBuffer commit]; return; }
   [self initFromModel];
-
-  // Switch textures
-  if (texturesON) {
-    // Begin textures
-    glEnable(GL_TEXTURE_2D);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  CGSize sz = self.drawableSize;
+  float bw = sz.width, bh = sz.height;
+  float ratio = bw / bh, fov = 30.0f, near = 60, far = 12000;
+  float top, bottom, left, right;
+  if (ratio >= 1.0f) {
+    top = near * tanf(fov * M_PI / 360.0f);
+    bottom = -top; left = bottom * ratio; right = top * ratio;
   } else {
-    glDisable(GL_LIGHTING);
+    right = near * tanf(fov * M_PI / 360.0f);
+    left = -right; top = right / ratio; bottom = left / ratio;
   }
-  // Vertex
-  glEnableClientState(GL_VERTEX_ARRAY);
-  
-  // Enable depth test
-  glEnable(GL_DEPTH_TEST);
-
-  // Front face
-  glFrontFace(GL_CCW);
-  glVertexPointer(3, GL_FLOAT, 0, mFVertexBuffer);
-  // Front face
-  if (texturesON) {
-    // Front Texture
-    glBindTexture(GL_TEXTURE_2D, textures[texfront]);
-    glTexCoordPointer(2, GL_FLOAT, 0, mTexBufferFront);
-  } else {
-    glColor4f(145.0f/255.0f, 199.0f/255.0f, 1.0f, 1.0f); // rgba => blue
+  simd_float4x4 proj = matFrustum(left, right, bottom, top, near, far);
+  simd_float4x4 view = matTranslate(0, 0, -900);
+  simd_float4x4 rotZ  = matRotate(angleZ, 0, 0, 1);
+  simd_float4x4 trans = matTranslate(mdx, mdy, mdz);
+  simd_float4x4 rotXY = matrix_multiply(matRotate(angleX, 0, 1, 0), matRotate(angleY, 1, 0, 0));
+  simd_float4x4 mvpBg    = matrix_multiply(proj, view);
+  simd_float4x4 mvpModel = matrix_multiply(matrix_multiply(matrix_multiply(proj, matrix_multiply(view, matrix_multiply(rotZ, trans))), rotXY), matrix_identity_float4x4);
+  id<MTLRenderCommandEncoder> enc = [cmdBuffer renderCommandEncoderWithDescriptor:rpd];
+  [self drawBackground:enc mvp:mvpBg];
+  if (totalPts == 0) {
+    [enc endEncoding];
+    [cmdBuffer presentDrawable:self.currentDrawable];
+    [cmdBuffer commit];
+    return;
   }
-  // Draw front face
-  glDrawArrays(GL_TRIANGLES, 0, nbPts); // GL_TRIANGLE_FAN ?
-  
-  // Back face
-  glFrontFace(GL_CW);
-  glVertexPointer(3, GL_FLOAT, 0, mFVertexBuffer);
-  // Back face
-  if (texturesON) {
-    // Back texture
-    glBindTexture(GL_TEXTURE_2D, textures[texback]);
-    glTexCoordPointer(2, GL_FLOAT, 0, mTexBufferBack);
-  } else {
-    glColor4f(1.0f, 249.0f/255.0f, 145.0f/255.0f, 1.0f); // rgba => yellow
+  Uniforms u;
+  u.mvp = mvpModel;
+  [enc setDepthStencilState:depthStencilState];
+  if (nbPts > 0) {
+    if (texturesON) {
+      [enc setRenderPipelineState:pipelineTextured];
+      [enc setFragmentSamplerState:samplerLinear atIndex:0];
+      u.useTexture = 1;
+      u.color = simd_make_float4(1,1,1,1);
+      [enc setFrontFacingWinding:MTLWindingCounterClockwise];
+      [enc setCullMode:MTLCullModeBack];
+      [enc setVertexBuffer:vertexBuffer offset:0 atIndex:0];
+      [enc setVertexBuffer:texBufferFront offset:0 atIndex:1];
+      [enc setVertexBytes:&u length:sizeof(u) atIndex:2];
+      [enc setFragmentBytes:&u length:sizeof(u) atIndex:2];
+      [enc setFragmentTexture:textures[texfront] atIndex:0];
+      [enc drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:nbPts];
+      [enc setFrontFacingWinding:MTLWindingClockwise];
+      [enc setVertexBuffer:texBufferBack offset:0 atIndex:1];
+      [enc setVertexBytes:&u length:sizeof(u) atIndex:2];
+      [enc setFragmentBytes:&u length:sizeof(u) atIndex:2];
+      [enc setFragmentTexture:textures[texback] atIndex:0];
+      [enc drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:nbPts];
+    } else {
+      [enc setRenderPipelineState:pipelineColored];
+      u.useTexture = 0;
+      u.color = simd_make_float4(145.0/255, 199.0/255, 1, 1);
+      [enc setFrontFacingWinding:MTLWindingCounterClockwise];
+      [enc setCullMode:MTLCullModeBack];
+      [enc setVertexBuffer:vertexBuffer offset:0 atIndex:0];
+      [enc setVertexBytes:&u length:sizeof(u) atIndex:2];
+      [enc setFragmentBytes:&u length:sizeof(u) atIndex:2];
+      [enc drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:nbPts];
+      u.color = simd_make_float4(1, 249.0/255, 145.0/255, 1);
+      [enc setFrontFacingWinding:MTLWindingClockwise];
+      [enc setVertexBytes:&u length:sizeof(u) atIndex:2];
+      [enc setFragmentBytes:&u length:sizeof(u) atIndex:2];
+      [enc drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:nbPts];
+    }
   }
-  // Draw back face
-  glDrawArrays(GL_TRIANGLES, 0, nbPts);
-  
-  // End textures
-	glDisable(GL_TEXTURE_2D);
-  
-// Lines - a mess to get black lines => no texture no light
-  glColor4f(0.0f, 0.0f, 0.0f, 1.0f); // rgba => black
-  glDisable(GL_TEXTURE_2D);
-  if (linesON) {
-    glDisable(GL_LIGHTING);
-    glLineWidth(3.0f);
-    glClear(GL_DEPTH_BUFFER_BIT); // See through faces
-    glVertexPointer(3, GL_FLOAT, 0, mFVertexBuffer);
-    glDrawArrays(GL_LINES, nbPts, nbPtsLines);
+  if (linesON && nbPtsLines > 0) {
+    [enc setRenderPipelineState:pipelineColored];
+    u.useTexture = 0;
+    u.color = simd_make_float4(0, 0, 0, 1);
+    [enc setCullMode:MTLCullModeNone];
+    [enc setVertexBuffer:vertexBuffer offset:0 atIndex:0];
+    [enc setVertexBytes:&u length:sizeof(u) atIndex:2];
+    [enc setFragmentBytes:&u length:sizeof(u) atIndex:2];
+    [enc drawPrimitives:MTLPrimitiveTypeLine vertexStart:nbPts vertexCount:nbPtsLines];
   }
-  glColor4f(1.0f, 1.0f, 1.0f, 1.0f); // rgba => white
-
-  // Render
-  glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderbuffer);
+  [enc endEncoding];
+  [cmdBuffer presentDrawable:self.currentDrawable];
+  [cmdBuffer commit];
 }
 
 - (void)layoutSubviews {
-  [EAGLContext setCurrentContext:context];
-  [self destroyFramebuffer];
-  [self createFramebuffer];
   [self drawModel];
   [self setMyNeedsDisplay];
 }
 
-- (BOOL)createFramebuffer {
-  glGenFramebuffersOES(1, &framebuffer);
-  glGenRenderbuffersOES(1, &renderbuffer);
-
-  glBindFramebufferOES(GL_FRAMEBUFFER_OES, framebuffer);
-  glBindRenderbufferOES(GL_RENDERBUFFER_OES, renderbuffer);
-  [context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer*)self.layer];
-  glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, renderbuffer);
-
-  glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
-  glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
-  
-  glGenRenderbuffersOES(1, &depthRenderbuffer);
-  glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthRenderbuffer);
-  glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES, backingWidth, backingHeight);
-  glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, depthRenderbuffer);
-
-  if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
-    NSLog(@"failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
-    return NO;
-  }
-  return YES;
-}
-
-- (void)destroyFramebuffer {
-  glDeleteFramebuffersOES(1, &framebuffer);
-  framebuffer = 0;
-  glDeleteRenderbuffersOES(1, &renderbuffer);
-  renderbuffer = 0;
-  glDeleteRenderbuffersOES(1, &depthRenderbuffer);
-  depthRenderbuffer = 0;
-}
-
 - (void)dealloc {
-  if ([EAGLContext currentContext] == context)
-    [EAGLContext setCurrentContext:nil];
-	if (textures[texfront] != 0){
-		glDeleteTextures(1, &textures[texfront1]);
-		glDeleteTextures(1, &textures[texfront2]);
-		glDeleteTextures(1, &textures[texback1]);
-		glDeleteTextures(1, &textures[texback2]);
-    glDeleteTextures(1, &textures[texbackground]);
-
-  }
-  [context release];
   [model release];
   [commands release];
-  free(mFVertexBuffer);
-  free(mTexBufferBack);
-  free(mTexBufferFront);
   [super dealloc];
 }
 // -------------
@@ -586,17 +450,17 @@ int nbPts, nbPtsLines, previousNbPts;
 	CGPoint pointA, pointB, prevA, prevB;
   static float lastDownTime, lastUpTime, lastUpUpTime;
   static BOOL wasRunning;
-  
+
   float currentTime = CACurrentMediaTime();
 
 	if ([touches count] == 1) {
     touchA = [[touches allObjects] objectAtIndex:0];
-    
+
 		pointA = [touchA locationInView:self];
 		pointB = [touchA previousLocationInView:self];
     angleX += (pointA.x - pointB.x) * 180.0f / 320;
     angleY += (pointA.y - pointB.y) * 180.0f / 320;
-    
+
     // One Pointer up
     if ([touchA phase] == UITouchPhaseEnded){
       // Triple tap undo - UpUpTime is set by double tap
@@ -634,10 +498,10 @@ int nbPts, nbPtsLines, previousNbPts;
 	else if ([touches count] == 2) {
     touchA = [[touches allObjects] objectAtIndex:0];
 		touchB = [[touches allObjects] objectAtIndex:1];
-    
+
 		pointA = [touchA locationInView:self];
 		pointB = [touchB locationInView:self];
-    
+
     // First second pointer down
     if ([touchB phase] == UITouchPhaseBegan) {
       lastDownTime = currentTime;
@@ -682,7 +546,7 @@ int nbPts, nbPtsLines, previousNbPts;
       float angle = (float)(acos(cos) * 180/M_PI);
       if (sin < 0)
         angle = -angle;
-      
+
       // Set
       angleZ += angle;
       mdx += dx;
@@ -690,10 +554,9 @@ int nbPts, nbPtsLines, previousNbPts;
       mdz += dd;
     }
 	}
-  
+
   // Draw result
-  [self drawModel];
-  [self setMyNeedsDisplay];
+    [self setMyNeedsDisplay];
 }
 
 @end

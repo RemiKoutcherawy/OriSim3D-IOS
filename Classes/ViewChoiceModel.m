@@ -65,23 +65,20 @@ const float gBarHeight = 30.0f;
 }
 
 - (void)open_or_collapse {
-  [UIView beginAnimations:nil context:NULL];
-  [UIView setAnimationDuration:0.25f];
-  
-  CGRect frame = [self frame];
-  
-  if (isOpen == FALSE) {
-    frame.origin.y -= contentHeight;
-    [barImageView setTransform:barImageViewRotation];
-    isOpen = YES;
-  }
-  else {
-    frame.origin.y += contentHeight;
-    [barImageView setTransform:CGAffineTransformIdentity];
-    isOpen = NO;
-  }
-  [self setFrame:frame];
-  [UIView commitAnimations];
+    [UIView animateWithDuration:0.25f animations:^{
+        CGRect frame = [self frame];
+        if (isOpen == NO) {
+            frame.origin.y -= contentHeight;
+            [barImageView setTransform:barImageViewRotation];
+            isOpen = YES;
+        }
+        else {
+            frame.origin.y += contentHeight;
+            [barImageView setTransform:CGAffineTransformIdentity];
+            isOpen = NO;
+        }
+        [self setFrame:frame];
+    }];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
