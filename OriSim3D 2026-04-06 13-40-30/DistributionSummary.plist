@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OriSim3D.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>1</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>B8A681C7CF66376D904C773DB25E8347A77B440D</string>
+				<key>dateExpires</key>
+				<string>05/04/2027</string>
+				<key>type</key>
+				<string>Cloud Managed Apple Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>2GS622B44D.fr.rk.OriSim3D</string>
+				<key>beta-reports-active</key>
+				<true/>
+				<key>com.apple.developer.team-identifier</key>
+				<string>2GS622B44D</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>2GS622B44D.fr.rk.OriSim3D</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>OriSim3D.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>6a5fdb2c-9610-4ba5-b96b-79c94586874a</string>
+				<key>dateExpires</key>
+				<string>05/04/2027</string>
+				<key>name</key>
+				<string>iOS Team Store Provisioning Profile: fr.rk.OriSim3D</string>
+			</dict>
+			<key>symbols</key>
+			<true/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>2GS622B44D</string>
+				<key>name</key>
+				<string>Remi Koutcherawy</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.5</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 100;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -55,6 +55,9 @@
 		A5D83E9F175B311000EB9726 /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E8F175B311000EB9726 /* icon114x114.png */; };
 		A5D83EA0175B311000EB9726 /* icon144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E90175B311000EB9726 /* icon144x144.png */; };
 		A5D83EA2175B311000EB9726 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D83E92175B311000EB9726 /* Triangle.png */; };
+		A5E0176C2F83B7CD00A97F90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E0176B2F83B7CD00A97F90 /* Assets.xcassets */; };
+		A5E017702F83C2E900A97F90 /* icon1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = A5E0176F2F83C2E900A97F90 /* icon1024x1024.png */; };
+		A5E017732F83CAAD00A97F90 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E017722F83CAAD00A97F90 /* LaunchScreen.storyboard */; };
 		A5E1E92A17D3B706006DB30C /* demon676x956.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5E1E92817D3B706006DB30C /* demon676x956.jpg */; };
 		A5E1E92B17D3B706006DB30C /* fee964x1364.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A5E1E92917D3B706006DB30C /* fee964x1364.jpg */; };
 		A5FA65782F825E8100B19F32 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = A5FA65772F825E5B00B19F32 /* Shaders.metal */; };
@@ -126,6 +129,9 @@
 		A5D83E8F175B311000EB9726 /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114x114.png; path = images/icon114x114.png; sourceTree = "<group>"; };
 		A5D83E90175B311000EB9726 /* icon144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon144x144.png; path = images/icon144x144.png; sourceTree = "<group>"; };
 		A5D83E92175B311000EB9726 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Triangle.png; path = images/Triangle.png; sourceTree = "<group>"; };
+		A5E0176B2F83B7CD00A97F90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A5E0176F2F83C2E900A97F90 /* icon1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon1024x1024.png; path = images/icon1024x1024.png; sourceTree = "<group>"; };
+		A5E017722F83CAAD00A97F90 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5E1E92817D3B706006DB30C /* demon676x956.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = demon676x956.jpg; path = images/demon676x956.jpg; sourceTree = "<group>"; };
 		A5E1E92917D3B706006DB30C /* fee964x1364.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fee964x1364.jpg; path = images/fee964x1364.jpg; sourceTree = "<group>"; };
 		A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OriSim3D.entitlements; sourceTree = "<group>"; };
@@ -135,13 +141,11 @@
 /* Begin PBXFrameworksBuildPhase section */
 		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				49930EF80E92F42C003FE459 /* CoreGraphics.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -175,7 +179,10 @@
 			isa = PBXGroup;
 			children = (
 				A51ADA1A17BAC39D009B678B /* README.md */,
+				A5E0176B2F83B7CD00A97F90 /* Assets.xcassets */,
+				A5E017722F83CAAD00A97F90 /* LaunchScreen.storyboard */,
 				A572BCA717BABCA400AD6529 /* .gitignore */,
+				8D1107310486CEB800E47090 /* Info.plist */,
 				A5E6218E173FD59A00BDB631 /* OriSim3D.entitlements */,
 				080E96DDFE201D6D7F000001 /* rk.ios */,
 				A5589B091747B45200809E16 /* rk.or */,
@@ -185,8 +192,10 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
+			indentWidth = 2;
 			name = CustomTemplate;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		29B97315FDCFA39411CA2CEA /* main */ = {
 			isa = PBXGroup;
@@ -227,9 +236,9 @@
 				A55DDD4617E606B7008D15B9 /* icon120x120.png */,
 				A5D83E90175B311000EB9726 /* icon144x144.png */,
 				A55DDD4A17E6086D008D15B9 /* icon152x152.png */,
+				A5E0176F2F83C2E900A97F90 /* icon1024x1024.png */,
 				A5D83E92175B311000EB9726 /* Triangle.png */,
 				A54441BD174ACAE000967558 /* iTunesArtwork */,
-				8D1107310486CEB800E47090 /* Info.plist */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -292,8 +301,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = OriSim3D;
 			productName = PVRTexLoader;
 			productReference = 1D6058910D05DD3D006BFB54 /* OriSim3D.app */;
@@ -314,7 +321,6 @@
 				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OriSim3D" */;
-			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -325,6 +331,7 @@
 				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			preferredProjectObjectVersion = 100;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -336,13 +343,14 @@
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A54441BE174ACAE000967558 /* iTunesArtwork in Resources */,
 				A5D83E5E175B2FAF00EB9726 /* Default-568h@2x.png in Resources */,
 				A5D83E7C175B30CA00EB9726 /* austria.txt in Resources */,
 				A5D83E7D175B30CA00EB9726 /* boat.txt in Resources */,
+				A5E0176C2F83B7CD00A97F90 /* Assets.xcassets in Resources */,
 				A5D83E7E175B30CA00EB9726 /* cocotte.txt in Resources */,
+				A5E017702F83C2E900A97F90 /* icon1024x1024.png in Resources */,
 				A5D83E7F175B30CA00EB9726 /* duck.txt in Resources */,
 				A5D83E93175B311000EB9726 /* austria72x72.png in Resources */,
 				A5D83E94175B311000EB9726 /* background256x256.jpg in Resources */,
@@ -367,20 +375,19 @@
 				A5675BCD17C149C400A6450B /* ville822x679.jpg in Resources */,
 				A5675BD117C21D2400A6450B /* butterfly.txt in Resources */,
 				A55DDD4917E60861008D15B9 /* icon76x76.png in Resources */,
+				A5E017732F83CAAD00A97F90 /* LaunchScreen.storyboard in Resources */,
 				A55DDD5117E60EF6008D15B9 /* icon58x58.png in Resources */,
 				A5675BD517C271FE00A6450B /* butterfly72x72.png in Resources */,
 				A5E1E92A17D3B706006DB30C /* demon676x956.jpg in Resources */,
 				A5E1E92B17D3B706006DB30C /* fee964x1364.jpg in Resources */,
 				A55DDD4717E606B7008D15B9 /* icon120x120.png in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				28FD14FE0DC6FC130079059D /* View3D.m in Sources */,
@@ -397,15 +404,16 @@
 				A5D83E76175B302C00EB9726 /* Model.m in Sources */,
 				A5D83E82175B30DE00EB9726 /* main.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1D6058940D05DD3E006BFB54 /* Debug */ = {
+		1D6058940D05DD3E006BFB54 /* Debug configuration for PBXNativeTarget "OriSim3D" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
@@ -418,6 +426,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = Assets.xcassets;
 				DEVELOPMENT_TEAM = 2GS622B44D;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -427,7 +437,9 @@
 				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OriSim3D;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.rk.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = OriSim3D;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -437,10 +449,12 @@
 			};
 			name = Debug;
 		};
-		1D6058950D05DD3E006BFB54 /* Release */ = {
+		1D6058950D05DD3E006BFB54 /* Release configuration for PBXNativeTarget "OriSim3D" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
@@ -453,6 +467,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = Assets.xcassets;
 				DEVELOPMENT_TEAM = 2GS622B44D;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -461,7 +477,9 @@
 				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OriSim3D;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.rk.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = OriSim3D;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -471,7 +489,7 @@
 			};
 			name = Release;
 		};
-		C01FCF4F08A954540054247B /* Debug */ = {
+		C01FCF4F08A954540054247B /* Debug configuration for PBXProject "OriSim3D" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -518,7 +536,7 @@
 			};
 			name = Debug;
 		};
-		C01FCF5008A954540054247B /* Release */ = {
+		C01FCF5008A954540054247B /* Release configuration for PBXProject "OriSim3D" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -572,19 +590,17 @@
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "OriSim3D" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1D6058940D05DD3E006BFB54 /* Debug */,
-				1D6058950D05DD3E006BFB54 /* Release */,
+				1D6058940D05DD3E006BFB54 /* Debug configuration for PBXNativeTarget "OriSim3D" */,
+				1D6058950D05DD3E006BFB54 /* Release configuration for PBXNativeTarget "OriSim3D" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OriSim3D" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C01FCF4F08A954540054247B /* Debug */,
-				C01FCF5008A954540054247B /* Release */,
+				C01FCF4F08A954540054247B /* Debug configuration for PBXProject "OriSim3D" */,
+				C01FCF5008A954540054247B /* Release configuration for PBXProject "OriSim3D" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
